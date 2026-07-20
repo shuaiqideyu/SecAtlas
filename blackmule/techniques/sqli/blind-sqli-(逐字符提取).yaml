@@ -1,0 +1,8 @@
+category: sqli
+date: '2026-07-20'
+detail: 提取 flags.flag_value
+id: blind-sqli-(逐字符提取)
+name: Blind SQLi (逐字符提取)
+result: success
+source_case: 20260720-digital-wallet-sqli-idor
+tool: ''

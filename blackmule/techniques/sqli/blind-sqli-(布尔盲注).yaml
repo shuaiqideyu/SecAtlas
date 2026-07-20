@@ -1,0 +1,8 @@
+category: sqli
+date: '2026-07-20'
+detail: 提取 sqlite_master → 发现隐藏表 flags
+id: blind-sqli-(布尔盲注)
+name: Blind SQLi (布尔盲注)
+result: success
+source_case: 20260720-digital-wallet-sqli-idor
+tool: ''

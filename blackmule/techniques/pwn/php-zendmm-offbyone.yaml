@@ -1,0 +1,48 @@
+# 技术卡: PHP 8.1 zend_mm off-by-one 检测与利用
+id: "pwn-php-zendmm-offbyone"
+name: "PHP zend_mm Off-by-one 堆溢出"
+category: "pwn"
+subcategory: "heap"
+severity: "critical"
+
+description: |
+  PHP自定义扩展中使用 _emalloc(n) 但实际写入 n+1 字节，
+  导致 null byte 溢出到相邻 heap chunk 的 metadata。
+  在PHP 8.1 zend_mm allocator中可导致free list corruption。
+
+trigger_signals:
+  - "X-PHP-Version header 存在"
+  - "debug输出 input_len 或 strlen 信息"
+  - "自定义 .so PHP扩展"
+  - "X-Alloc-Bins header (zend_mm信息泄露)"
+
+detection:
+  - step: "找 debug 回显"
+    action: "发送不同长度输入，观察 input_len 或其他 debug 输出"
+  - step: "测边界"
+    action: "对每个bin边界值 (8,16,24,32,40,48,...2048) 发送 len(u)+len(p)=bin-1 的输入"
+    check: "响应体大小是否与正常情况差1字节"
+  - step: "确认overflow方向"
+    action: "发送 len=bin-1 输入 → alloc(bin) → sprintf写bin+1字节 → \0溢出"
+
+php81_zval_struct:
+  value_offset: "0x00 (8 bytes)"
+  type_info_offset: "0x08"
+  IS_UNDEF: 0
+  IS_NULL: 1
+  IS_FALSE: 2
+  IS_TRUE: 3
+
+exploit_theory:
+  - "目标: 覆盖 return_value->u1.type_info 从 IS_FALSE(0x2) 到 IS_TRUE(0x3)"
+  - "路径: off-by-one破坏相邻chunk → free list corruption → 下次_emalloc返回栈地址 → 写入IS_TRUE"
+  - "难点: zval在栈上，需要精确堆风水使alloc返回栈指针"
+  - "前置: 理解zend_mm chunk header结构 + free list管理"
+
+prerequisites:
+  - "PHP 8.1 zend_mm 源码级理解"
+  - "本地PHP调试环境 (带debug符号)"
+  - "GDB + PHP-gdb扩展"
+  - "pwntools (Python exploit开发)"
+
+source_case: "20260720-echoes-of-heap"
