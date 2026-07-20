@@ -20,6 +20,8 @@ trigger_signals:
   - "DNS 解析后不做二次 IP 校验"
   - "IPv6 支持但未过滤回环地址"
 
+payloads:
+
 ip_representations:
   - format: "IPv4 十进制整数"
     "127.0.0.1": "2130706433"

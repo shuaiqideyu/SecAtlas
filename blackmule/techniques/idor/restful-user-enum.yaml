@@ -37,6 +37,16 @@ escalation:
   - "发现隐藏用户 → 关联其他漏洞"
   - "用户列表 → 社工/凭据喷洒"
 
+prerequisites:
+  - "RESTful API 使用自增整数 ID"
+  - "服务端未校验资源归属"
+  - "JWT 或 session 中无用户范围限制"
+
+upgrade_paths:
+  - "提取 admin token → 提权"
+  - "用户列表 → 凭据喷洒"
+  - "组合 SQLi → 全量数据导出"
+
 defense:
   - "服务端校验 JWT user.id == :id"
   - "UUID 代替自增 ID"

@@ -51,6 +51,8 @@ defense_primary:
   - "使用编程语言 HTTP/文件库代替 shell 调用"
   - "白名单验证输入值"
 
+defense:
+
 success_indicators:
   - "curl -o 写入文件成功"
   - "攻击者服务器收到外泄文件"

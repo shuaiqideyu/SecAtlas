@@ -19,6 +19,8 @@ trigger_signals:
   - "邮件模板/报表/自定义页面功能"
   - "输入 ${{<%[%'\"}} 后页面报错或语法变更"
 
+payloads:
+
 detection_probes:
   jinja2_twig:
     probe: "{{7*7}}"

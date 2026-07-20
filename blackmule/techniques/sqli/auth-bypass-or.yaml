@@ -47,6 +47,12 @@ prerequisites:
   - "username 参数未参数化"
   - "登录接口可访问"
 
+defense:
+  - "参数化查询 (PreparedStatement)"
+  - "登录接口加验证码和速率限制"
+  - "禁用详细错误回显"
+  - "最小权限数据库账户"
+
 upgrade_paths:
   - "Union SQLi 提取数据"
   - "Boolean-based Blind SQLi 逐字符提取"

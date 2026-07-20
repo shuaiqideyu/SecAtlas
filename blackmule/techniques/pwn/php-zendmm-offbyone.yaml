@@ -39,10 +39,34 @@ exploit_theory:
   - "难点: zval在栈上，需要精确堆风水使alloc返回栈指针"
   - "前置: 理解zend_mm chunk header结构 + free list管理"
 
+payloads:
+  - technique: "bin边界探测"
+    payload: "对每个bin边界值 (8,16,24,32,...,2048) 发送 len(u)+len(p)=bin-1 的输入"
+    note: "观察响应体大小是否比正常情况差1字节"
+  - technique: "确认overflow方向"
+    payload: "发送 len=bin-1 输入 → alloc(bin) → sprintf写bin+1字节 → \\0溢出"
+
+success_indicators:
+  - "响应体大小出现335 vs 334字节差异"
+  - "确认null byte溢出到相邻chunk metadata"
+
 prerequisites:
   - "PHP 8.1 zend_mm 源码级理解"
   - "本地PHP调试环境 (带debug符号)"
   - "GDB + PHP-gdb扩展"
   - "pwntools (Python exploit开发)"
+
+defense:
+  - "代码审计确保_emalloc与实际写入匹配"
+  - "使用安全内存分配API"
+  - "隐藏PHP版本和allocator信息"
+  - "不暴露debug信息到HTTP响应"
+
+sources:
+  - agent: "BlackMule"
+    date: "2026-07-20"
+  - case: "20260720-echoes-of-heap"
+  - kb: "KB-PWN-01"
+  - ref: "CWE-122 / CWE-193"
 
 source_case: "20260720-echoes-of-heap"

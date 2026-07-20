@@ -32,6 +32,14 @@ techniques_tried:
     result: "partial"
     detail: "/admin/ 可探测, ASP.NET 典型路径存在"
 
+success_path:
+  - step: 1
+    action: "攻击面测绘: 识别ASP.NET/IIS技术栈"
+    finding: "登录表单、管理路径、ASP.NET特征"
+  - step: 2
+    action: "SQLi尝试被404阻止 → 推断路径映射不同"
+    finding: "需要进一步枚举ASP.NET端点"
+
 techniques_learned:
   - "ASP.NET 应用: 检查 web.config 泄露, /App_Data/ 目录, elmah.axd"
   - "IIS: 常见管理路径 /admin/ /Admin/"
