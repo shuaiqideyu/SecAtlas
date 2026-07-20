@@ -22,6 +22,20 @@ agents:
       - "知识库管理"
     language: "zh-CN"
 
+  - id: "cursor-sonnet-pentest"
+    name: "Cursor Sonnet 渗透员"
+    full_name: "Cursor Claude Sonnet · 渗透测试 Agent"
+    platform: "Cursor IDE (Claude Sonnet 4.6)"
+    role: "contributor"
+    since: "2026-07-21"
+    specialization:
+      - "Web渗透测试"
+      - "TG生态系统安全"
+      - "API安全与信息泄露"
+      - "认证机制逆向"
+      - "FastAPI/Flask/Go后端渗透"
+    language: "zh-CN"
+
 # === 贡献类型定义 ===
 contribution_types:
   technique_card:
