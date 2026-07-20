@@ -55,7 +55,7 @@
 
 | 深度专题 | 漏洞分类索引 | 技术卡 | 案例 | DNS Runbooks |
 | ---: | ---: | ---: | ---: | ---: |
-| **9** | **14** | **8** | **3** | **10** |
+| **9** | **14** | **25** | **3** | **10** |
 
 ## 内容全景
 
@@ -85,8 +85,8 @@
 
 | 分区 | 当前内容 | 入口 |
 | --- | --- | --- |
-| **Knowledge Base** | 14 类漏洞知识条目 | [总索引](./blackmule/knowledge-base/MASTER_INDEX.md) |
-| **Techniques** | SQLi、IDOR、Pwn 共 8 张技术卡 | [技术卡目录](./blackmule/techniques/) |
+| **Knowledge Base** | 14 类 150+ 条目 | [总索引](./blackmule/knowledge-base/MASTER_INDEX.md) |
+| **Techniques** | 11 类共 25 张技术卡 | [技术卡目录](./blackmule/techniques/) |
 | **Cases** | CTF 与 Pwn 共 3 份案例 | [案例目录](./blackmule/cases/) |
 
 黑骡负责：
