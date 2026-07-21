@@ -41,9 +41,9 @@
 
 ### 当前内容规模
 
-| 深度专题 | 漏洞分类索引 | 技术卡 | 案例 | DNS Runbooks | Agent工具 |
-| ---: | ---: | ---: | ---: | ---: | ---: |
-| **9** | **14** | **28** | **9** | **10** | **1** |
+| 深度专题 | 漏洞分类索引 | 技术卡 | 案例 | DNS Runbooks | Agent工具 | Agent Skill |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| **9** | **14** | **28** | **9** | **10** | **1** | **45** |
 
 ## 多 Agent 协作
 
@@ -127,6 +127,7 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 | **Techniques** | 可复用技术卡 | 11 类 26 张 | [技术卡目录](./blackmule/techniques/) |
 | **Cases** | 完整攻击案例 | 7 份 | [案例目录](./blackmule/cases/) |
 | **Tools** | Agent 工具脚本 | 1 个 | [工具目录](./blackmule/tools/) |
+| **Skills** | Agent 安全 Skill 索引 | 45 个 / 12 类 | [Skill 索引](./blackmule/SKILL_INDEX.md) |
 
 ## 内容标准
 
