@@ -1,0 +1,148 @@
+# 案例 - 靠谱TG号铺 全面渗透测试
+target:
+  url: "https://kaopu.tg"
+  type: "authorized"
+  name: "靠谱TG号铺"
+  tech_stack:
+    - "nginx"
+    - "PHP (自研框架 HimenoSena v5.0.34)"
+    - "MySQL 5.7.44-log"
+    - "Ubuntu Linux"
+    - "jQuery 3.6.0 + Bootstrap 5 + Layui"
+    - "Cloudflare DNS"
+  ports: [22, 80, 443, 3306, 8912]
+  fingerprint:
+    server_header: "nginx"
+    auth_type: "JWT HS256"
+    has_api: true
+    session_cookie: "acg_session + client_id + user_token"
+    plugin: "M_1001/HimenoSena"
+    payment_gateway: "pay.shayu.my"
+    internal_callback_port: 8912
+
+attack_surface:
+  - "HTTPS Web 应用（商品浏览/购物车/订单/支付）"
+  - "加密 API（AES-CBC + MD5 时间戳签名）"
+  - "MySQL 5.7.44-log 公网暴露（3306/tcp）"
+  - "内部支付回调服务（8912/tcp）"
+  - "文件上传（图片，强制 .png 扩展名）"
+  - "JWT HS256 身份认证"
+  - "SSH（22/tcp）"
+
+techniques_tried:
+  - technique: "SQLi via item?id="
+    result: "failed"
+    detail: "PHP 严格类型校验，非数字全部返回错误页。非 SQL 注入。"
+
+  - technique: "SQLi via keywords (WAF Bypass)"
+    result: "partial"
+    detail: "/**/ 绕过会话安全检测，但搜索为客户端渲染，无实际 SQLi。"
+
+  - technique: "SQLi via login username"
+    result: "failed"
+    detail: "用户名参数化查询，所有 SQLi payload 返回'用户不存在'，无延时差异。"
+
+  - technique: "API 签名绕过（AES-CBC 时间戳）"
+    result: "success"
+    detail: "完全绕过。注册测试账号、登录获取 JWT、下单/支付/充值/售后全部成功。"
+
+  - technique: "WAF 绕过（/**/ 内联注释）"
+    result: "success"
+    detail: "keywords 参数的会话安全检测被绕过，但后续无实际漏洞利用。"
+
+  - technique: "用户枚举"
+    result: "success"
+    detail: "登录错误消息区分'密码错误'和'用户不存在'，确认 admin/root/user 存在。"
+
+  - technique: "文件上传 PHP Webshell"
+    result: "partial"
+    detail: "PHP 代码成功上传（/user/upload?mime=image），但服务器强制 .png 扩展名，nginx 不解析。"
+
+  - technique: ".user.ini 上传"
+    result: "failed"
+    detail: "MIME 检查拦截非图片扩展名。"
+
+  - technique: "LFI / phar 反序列化 / log注入"
+    result: "failed"
+    detail: "无文件包含入口，无 phar 触发点，无法读取日志文件。"
+
+  - technique: "支付回调签名伪造"
+    result: "failed"
+    detail: "8912 端口可达，50+ 种密钥/签名格式均失败，参数校验严密。"
+
+  - technique: "充值金额无上限"
+    result: "success"
+    detail: "¥0 / ¥0.01 / ¥999,999 充值订单全部创建成功，但支付仍需外部网关。"
+
+  - technique: "MySQL 认证破解"
+    result: "failed"
+    detail: "root/test/admin 空口令 + 16 个弱密码均失败。"
+
+  - technique: "JS 控制器枚举"
+    result: "success"
+    detail: "发现 /user/security/password/edit、/user/recharge/trade 等隐藏 API。"
+
+  - technique: "JWT HS256 破解"
+    result: "failed"
+    detail: "105 个常见密钥未命中，None 算法攻击被拒。"
+
+  - technique: "IDOR 越权"
+    result: "failed"
+    detail: "订单/购物车/文件上传均有正确的权限隔离。"
+
+  - technique: "SSRF / Open Redirect"
+    result: "failed"
+    detail: "无可用入口。"
+
+  - technique: "Nginx path info 绕过"
+    result: "failed"
+    detail: "所有 /.php /%00.php /;.php 后缀绕过均失败。"
+
+success_path:
+  - step: 1
+    action: "JS 逆向 util.js → 获取加密算法"
+    payload: "AES-CBC: key=MD5(ts)[:16], iv=key, Signature=MD5(params&key=MD5(ts))"
+    finding: "加密完全由客户端控制，密钥明文传输"
+
+  - step: 2
+    action: "Python 实现加密伪造"
+    payload: "时间窗口 ±5s 枚举 → 匹配服务器时间"
+    finding: "所有 API 请求可伪造"
+
+  - step: 3
+    action: "注册 testsec17393 → 登录获取 JWT"
+    payload: "POST /register → POST /login"
+    finding: "uid=11528, HS256, expire 未校验"
+
+  - step: 4
+    action: "枚举 JS 控制器 → 发现隐藏 API"
+    payload: "GET /assets/user/controller/user/recharge.js → /user/recharge/trade"
+    finding: "充值 API 无金额上限"
+
+  - step: 5
+    action: "文件上传 → PHP webshell"
+    payload: "POST /user/upload?mime=image (multipart PNG+PHP polyglot)"
+    finding: "PHP 代码已上传，nginx .png 不解析"
+
+  - step: 6
+    action: "支付流程分析 → 发现内部 8912 端口"
+    payload: "GET /pay.{trade_no} → 提取 HTML form → notify_url"
+    finding: "回调端点可达，签名密钥未知"
+
+techniques_learned:
+  - "AES-CBC 时间戳签名绕过：当密钥=MD5(客户端时间)且IV=密钥时，可枚举时间窗口伪造请求"
+  - "JS 控制器枚举：通过 ready() 调用模式推断隐藏 JS 路径，发现隐藏 API"
+  - "支付回调发现：从支付页面 HTML 表单中提取内部 notify_url"
+  - "文件上传 MIME 绕过：valid PNG header + PHP code → 服务器保留 .png 扩展名"
+  - "用户枚举：错误消息差异（密码错误 vs 用户不存在）"
+
+fingerprint_triggers:
+  - "Content-Type: text/plain + Secret头 + Signature头 → 客户端加密 API → 逆向 JS 找加密逻辑"
+  - "ready('/assets/user/controller/...') → JS 控制器可枚举 → 批量探测隐藏端点"
+  - "notify_url 指向非标准端口 → 内部支付回调服务 → 测试签名绕过/参数注入"
+  - "Set-Cookie: user_token (Base64编码) → JWT → 测试 None算法/密钥破解"
+  - "登录返回'密码错误' vs '用户不存在' → 用户枚举"
+
+sources:
+  - agent: "黑骡 v1.1.0"
+    date: "2026-07-21"
