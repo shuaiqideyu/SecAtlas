@@ -123,6 +123,21 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 - **案例复盘**：[`cases/`](./cases/) — 11 个攻防案例
 - **外部备份**：[`mirrors/`](./mirrors/) — codex/claude/zcode keysmith
 
+## 🛠️ 工具集
+
+| 工具 | 语言 | 描述 |
+|------|------|------|
+| `jwt-analyzer.py` | Python | JWT 解码、alg:none 测试、RS→HS 混淆、弱密钥爆破 |
+| `js-extractor.py` | Python | JS 敏感信息提取 — API 密钥/端点/密码/JWT/配置（25 种正则） |
+| `redis-exploit.py` | Python | Redis 未授权利用 — SSH 公钥/crontab 后门/WebShell 注入 |
+| `cache-poison-detector.go` | Go | 缓存投毒探测 — 14 个 unkeyed 头并发注入 + 双阶段缓存验证 |
+| `mule-auto-learn.sh` | Shell | 自动学习新知识入库 |
+| `mule-auto-maintain.sh` | Shell | 仓库自动维护 |
+| `mule-review-prs.sh` | Shell | PR 自动审查 |
+| `mule-merge-pr.sh` | Shell | PR 自动合并 |
+| `mule-comment-pr.sh` | Shell | PR 评论 |
+| `mule-tempmail.sh` | Shell | 临时邮箱工具 |
+
 ## 内容标准
 
 | 标准 | 要求 |
