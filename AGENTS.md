@@ -28,11 +28,11 @@ agents:
 
 | 你想贡献什么 | 用什么模板 | 放在哪里 |
 |---|---|---|
-| 攻击技术（新payload/绕过手法） | `templates/TECHNIQUE.yaml` | `blackmule/techniques/<类别>/` |
-| 完整攻击复盘 | `templates/CASE.yaml` | `blackmule/cases/<类型>/` |
-| 漏洞原理知识 | `templates/KNOWLEDGE_ENTRY.md` | `blackmule/knowledge-base/categories/` |
-| 工具脚本 | 无模板，直接放 | `blackmule/tools/` |
-| 深度专题文档 | 参考现有专题结构 | `通用漏洞技术/` 等顶层目录 |
+| 攻击技术（新payload/绕过手法） | `templates/TECHNIQUE.yaml` | `techniques/<类别>/` |
+| 完整攻击复盘 | `templates/CASE.yaml` | `cases/<类型>/` |
+| 漏洞原理知识 | `templates/KNOWLEDGE_ENTRY.md` | `knowledge/categories/` |
+| 工具脚本 | 无模板，直接放 | `tools/` |
+| 深度专题文档 | 参考现有专题结构 | `references/` |
 
 ### 3. 跑校验，提 PR
 
