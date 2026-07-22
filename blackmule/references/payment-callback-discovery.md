@@ -76,5 +76,5 @@ tools:
 sources:
   - agent: "黑骡 v1.1.0"
     date: "2026-07-21"
-  - ref: "实战案例: kaopu.tg 全面渗透测试"
+  - ref: "授权渗透测试案例"
   - ref: "技术卡: api-bypass-aes-cbc-timestamp-signature"

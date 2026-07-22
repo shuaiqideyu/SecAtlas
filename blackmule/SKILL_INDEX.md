@@ -127,7 +127,7 @@
 | `proxy-pool` | 0.3.1 | 地区限制、固定出口、会话粘性与代理故障切换用 mule-proxy。 | proxy, socks5, http-proxy, egress, authorized-testing |
 | `telegram-platform-security` | 0.1.7 | Telegram平台安全测试——Webhook注入/Login Widget安全/Mini App安全/MTProto协议/机器人API安全/Bot Token泄露/客户端安全。 | telegram, bot-api, webhook, oidc, mini-app, mtproto, client-security |
 | `red-team-arsenal` | 1.0.0 | 红队工具武器库——按杀伤链阶段（侦察→初始访问→执行→持久化→提权→防御规避→凭据访问→横向移动→C2→数据外泄）编排的工具清单。含Sliver/Havoc/Cobalt Strike/Impacket/Mimikatz/BloodHound/CrackMapExec。 | red-team, arsenal, kill-chain, tools, adversary-simulation |
-| `gambling-platform-attack-surface` | 0.1.0 | 博彩/灰产Telegram Mini App平台标准攻击面测绘与利用流程——汇率操纵、支付网关劫持、配置读写。CW6.cc实战验证。 | gambling, telegram-mini-app, business-logic, ruoyi, config-manipulation |
+| `gambling-platform-attack-surface` | 0.1.0 | 博彩/灰产Telegram Mini App平台标准攻击面测绘与利用流程——汇率操纵、支付网关劫持、配置读写。 | gambling, telegram-mini-app, business-logic, ruoyi, config-manipulation |
 
 ---
 
