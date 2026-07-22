@@ -41,9 +41,11 @@
 
 ### 当前内容规模
 
-| 深度专题 | 漏洞分类索引 | 技术卡 | 案例 | DNS Runbooks | Agent工具 | Agent Skill |
+| 技术卡 | 知识条目 | 案例 | 专题 | 工具 | Skill | 镜像 |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| **9** | **14** | **34** | **11** | **10** | **6** | **46** |
+| **37** | **15** | **11** | **52篇/9专题** | **10** | **47** | **3** |
+
+📊 [CAPABILITY.md](./CAPABILITY.md) — 完整能力索引
 
 ## 多 Agent 协作
 
@@ -98,36 +100,28 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 
 ## 内容全景
 
-| 领域 | 专题入口 | 核心内容 |
+| 领域 | 入口 | 核心内容 |
 | --- | --- | --- |
-| **注入安全** | [SQL 注入公开学习路线](./通用漏洞技术/注入类/SQL注入/README.md) | 根因、漏洞形态、盲注、代码审计、修复、误判与实验室 |
-| **现代身份认证** | [Passkey 与 WebAuthn](./通用漏洞技术/身份认证/Passkey与WebAuthn/README.md) | 依赖方验证、抗钓鱼边界、凭据生命周期与审计清单 |
-| **OAuth / OIDC** | [授权码流与令牌重放防护](./通用漏洞技术/会话与令牌/TECH-2026-9700-OAuth2授权码流与令牌重放防护.md) | 回调绑定、PKCE、Issuer、Token 与重放防护 |
-| **HTTP 协议边界** | [HTTP 请求走私与 Desync](./通用漏洞技术/请求与协议边界/HTTP请求走私与Desync/README.md) | 多组件解析差异、连接状态、证据门槛与复测 |
-| **实时通信安全** | [WebSocket 与 SSE](./Web与API安全/WebSocket与SSE/README.md) | Origin、消息授权、订阅、恢复、资源治理与审计 |
-| **DNS 安全** | [DNS 与 DNSSEC](./网络与协议安全/DNS与DNSSEC/README.md) | 委派、解析、DNSSEC、动态更新、重绑定与子域接管 |
-| **TLS 重放防护** | [TLS 1.3 0-RTT](./网络与协议安全/TLS_PKI与证书/TLS1.3-0RTT重放防护/README.md) | Early Data、反重放状态、业务幂等与多节点边界 |
-| **云身份安全** | [元数据与工作负载身份](./云与云原生安全/元数据与工作负载身份/README.md) | 元数据入口、身份交换、云 IAM 与低影响验证 |
-| **软件供应链** | [SBOM、签名与来源证明](./源码审计_供应链与DevSecOps/制品_签名_SBOM/README.md) | SBOM、VEX、Sigstore、in-toto、SLSA 与消费策略 |
+| **注入安全** | [SQL 注入专题](./references/sql-injection/) | 根因、漏洞形态、盲注、代码审计、修复、误判与实验室 |
+| **现代身份认证** | [Passkey/WebAuthn](./references/passkey-webauthn/) | 依赖方验证、抗钓鱼边界、凭据生命周期与审计清单 |
+| **OAuth/OIDC** | [授权码流与令牌重放](./references/oauth-oidc/) | 回调绑定、PKCE、Issuer、Token 与重放防护 |
+| **HTTP 协议边界** | [请求走私与 Desync](./references/request-smuggling/) | 多组件解析差异、连接状态、证据门槛与复测 |
+| **实时通信** | [WebSocket 与 SSE](./references/websocket-sse/) | Origin、消息授权、订阅、恢复、资源治理与审计 |
+| **DNS 安全** | [DNS 与 DNSSEC](./references/dns-dnssec/) | 委派、解析、DNSSEC、动态更新、重绑定与子域接管 |
+| **TLS** | [TLS 1.3 0-RTT](./references/tls-pki/) | Early Data、反重放状态、业务幂等与多节点边界 |
+| **云身份** | [元数据与工作负载身份](./references/cloud-metadata/) | 元数据入口、身份交换、云 IAM 与低影响验证 |
+| **供应链** | [SBOM/签名/来源证明](./references/sbom-supply-chain/) | SBOM、VEX、Sigstore、in-toto、SLSA 与消费策略 |
+| **投毒作战** | [poison-ops](./techniques/) | 缓存/日志/DNS-ARP/CI-CD/Session/数据层 6 链 |
+| **红队工具** | [工具集](./tools/) | JWT分析/缓存探测/JS提取/Redis利用 |
 
 ## 精选入口
 
-- **如果你是 AI Agent**：从 [`AGENTS.md`](./AGENTS.md) 开始
-- **从零建立漏洞模型**：[SQL 注入公开学习路线](./通用漏洞技术/注入类/SQL注入/README.md)
-- **学习协议与证据判断**：[DNS/DNSSEC 授权渗透测试学习包](./网络与协议安全/DNS与DNSSEC/授权渗透测试学习包/README.md) 含 10 篇 Runbook
-- **快速检索实战知识**：[黑骡渗透知识库](./blackmule/README.md) 汇总 14 类漏洞、26 张技术卡、7 份案例
-
-## 黑骡知识中枢
-
-[`blackmule`](./blackmule/README.md) 是 SecAtlas 的实战知识分区。
-
-| 分区 | 内容 | 规模 | 入口 |
-| --- | --- | ---: | --- |
-| **Knowledge Base** | 漏洞分类知识 | 14 类 150+ 条目 | [总索引](./blackmule/knowledge-base/MASTER_INDEX.md) |
-| **Techniques** | 可复用技术卡 | 11 类 26 张 | [技术卡目录](./blackmule/techniques/) |
-| **Cases** | 完整攻击案例 | 7 份 | [案例目录](./blackmule/cases/) |
-| **Tools** | Agent 工具脚本 | 1 个 | [工具目录](./blackmule/tools/) |
-|| **Skills** | Agent 安全 Skill 索引 | 46 个 / 12 类 | [Skill 索引](./blackmule/SKILL_INDEX.md) |
+- **AI Agent 入口**：[`AGENTS.md`](./AGENTS.md) / [`CAPABILITY.md`](./CAPABILITY.md)
+- **实战技术卡**：[`techniques/`](./techniques/) — 37 张 YAML 技术卡，含触发信号/payload/判据
+- **深度专题**：[`references/`](./references/) — 9 个专题 52 篇文档
+- **知识蒸馏**：[`knowledge/`](./knowledge/) — 15 个分类 150+ 条目
+- **案例复盘**：[`cases/`](./cases/) — 11 个攻防案例
+- **外部备份**：[`mirrors/`](./mirrors/) — codex/claude/zcode keysmith
 
 ## 内容标准
 

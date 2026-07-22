@@ -3,6 +3,8 @@
 > 自动生成于 2026-07-23 | 总计 **47** 个 Skill | 12 个分类
 >
 > 真源：`/root/.hermes/skills/security/`
+>
+> 📊 **完整能力索引** → [CAPABILITY.md](./CAPABILITY.md)（含技术卡/工具/知识/案例/镜像全貌）
 
 ## 分类概览
 
@@ -11,6 +13,7 @@
 | 编排与治理 | 13 |
 | 侦察与信息收集 | 6 |
 | Web与API安全 | 4 |
+| 投毒作战 | 1 |
 | 云与容器安全 | 3 |
 | AD与内网渗透 | 2 |
 | 二进制与逆向 | 3 |
@@ -60,6 +63,12 @@
 | `web-runtime-security` | 0.1.2 | Next/Nuxt SSR、RSC、缓存、WebSocket/SSE 授权测试。 | nextjs, nuxt, ssr, react-server-components, graphql, websocket, sse, cache-security |
 | `high-value-assessment` | 0.3.1 | 凭证/后台/API越权/支付/Web3 六类高价值路径选择。 | authorized-assessment, secrets, admin, api, jwt, oauth, payment, web3, evidence |
 | `bug-bounty-methodology` | 1.0.0 | 漏洞赏金方法论——从侦察到报告的完整赏金猎人工作流，含高星项目经验总结。 | bug-bounty, methodology, recon, automation, reporting |
+
+## 投毒作战
+
+| Skill | 版本 | 描述 | 标签 |
+| --- | --- | --- | --- |
+| `poison-ops` | 1.0.0 | 六条投毒链路——Web缓存/日志→LFI→RCE/DNS-ARP/CI-CD流水线/Session-Config/数据层。覆盖投递→驻留→触发→验证端到端。 | poisoning, cache-poisoning, log-poisoning, dns-poisoning, arp-spoofing, cicd, supply-chain, red-team, persistence |
 
 ## 云与容器安全
 
