@@ -103,12 +103,11 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 | 领域 | 入口 | 核心内容 |
 | --- | --- | --- |
 | **注入安全** | [SQL 注入专题](./references/sql-injection/) | 根因、漏洞形态、盲注、代码审计、修复、误判与实验室 |
-| **现代身份认证** | [Passkey/WebAuthn](./references/passkey-webauthn/) | 依赖方验证、抗钓鱼边界、凭据生命周期与审计清单 |
+| **现代身份认证** | [Passkey/WebAuthn](./references/passkey-webauthn/passkey-webauthn-docs/) | 依赖方验证、抗钓鱼边界、凭据生命周期与审计清单 |
 | **OAuth/OIDC** | [授权码流与令牌重放](./references/oauth-oidc/) | 回调绑定、PKCE、Issuer、Token 与重放防护 |
-| **HTTP 协议边界** | [请求走私与 Desync](./references/request-smuggling/) | 多组件解析差异、连接状态、证据门槛与复测 |
-| **实时通信** | [WebSocket 与 SSE](./references/websocket-sse/) | Origin、消息授权、订阅、恢复、资源治理与审计 |
+| **HTTP 协议边界** | [请求走私与 Desync](./references/request-smuggling/desync-docs/) | 多组件解析差异、连接状态、证据门槛与复测 |
 | **DNS 安全** | [DNS 与 DNSSEC](./references/dns-dnssec/) | 委派、解析、DNSSEC、动态更新、重绑定与子域接管 |
-| **TLS** | [TLS 1.3 0-RTT](./references/tls-pki/) | Early Data、反重放状态、业务幂等与多节点边界 |
+| **TLS** | [TLS 1.3 0-RTT](./references/tls-pki/0rtt-replay/) | Early Data、反重放状态、业务幂等与多节点边界 |
 | **云身份** | [元数据与工作负载身份](./references/cloud-metadata/) | 元数据入口、身份交换、云 IAM 与低影响验证 |
 | **供应链** | [SBOM/签名/来源证明](./references/sbom-supply-chain/) | SBOM、VEX、Sigstore、in-toto、SLSA 与消费策略 |
 | **投毒作战** | [poison-ops](./techniques/) | 缓存/日志/DNS-ARP/CI-CD/Session/数据层 6 链 |

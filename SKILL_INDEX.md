@@ -2,7 +2,7 @@
 
 > 自动生成于 2026-07-23 | 总计 **47** 个 Skill | 12 个分类
 >
-> 真源：`/root/.hermes/skills/security/`
+> 真源：Hermes 安全 Skill 目录
 >
 > 📊 **完整能力索引** → [CAPABILITY.md](./CAPABILITY.md)（含技术卡/工具/知识/案例/镜像全貌）
 
