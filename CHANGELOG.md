@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-07-23 — AI Agent/MCP 闭环与校验修复
+
+### Added
+- `knowledge/categories/agentic-ai.md`：AI Agent/MCP 漏洞原理、最小验证、证据、修复与复测。
+- `references/agentic-ai/`：攻击面控制对、证据停止点复测清单、来源与取舍。
+
+### Fixed
+- `scripts/validate.sh` 改用当前顶层目录，并正确累计校验错误；此前可能在未检查任何文件时报告通过。
+- `agent-manifest.yaml` 修正重构后的目录路径和知识条目闭环要求。
+
 ## 2026-07-23 — v2.0 Restructure
 
 ### Added

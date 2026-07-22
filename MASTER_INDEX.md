@@ -5,10 +5,10 @@
 
 ## 内容入口
 
-- [`knowledge/categories/`](./knowledge/categories/)：按漏洞类型整理的深度知识条目（14类 150+ 条目）。
+- [`knowledge/categories/`](./knowledge/categories/)：按漏洞类型整理的深度知识条目（15类 150+ 条目，含 AI Agent/MCP）。
 - [`techniques/`](./techniques/)：可复用技术卡（18类 37 张）。
 - [`cases/`](./cases/)：靶场、CTF 与授权实战案例（15 个）。
-- [`references/`](./references/)：深度专题文档（SQL注入/WebSocket/云元数据/SBOM供应链/DNS/TLS/OAuth/Passkey/请求走私）。
+- [`references/`](./references/)：深度专题文档（SQL注入/WebSocket/云元数据/SBOM供应链/DNS/TLS/OAuth/Passkey/请求走私/AI Agent，共 10 个专题、56 篇文档）。
 - [`mirrors/`](./mirrors/)：外部仓库镜像备份（codex-keysmith/claude-keysmith/zcode-keysmith）。
 - [`SKILL_INDEX.md`](./SKILL_INDEX.md)：黑骡安全 Skill 索引（47 个 / 12 类）。
 

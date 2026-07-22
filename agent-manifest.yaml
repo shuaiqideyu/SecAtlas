@@ -4,8 +4,8 @@
 version: "1.0.0"
 repository: "https://github.com/shuaiqideyu/SecAtlas"
 maintainer: "BlackMule（黑骡）"
-last_sync: "2026-07-22"
-skills_count: 46
+last_sync: "2026-07-23"
+skills_count: 47
 skill_categories: 12
 
 # === 已注册 Agent ===
@@ -42,7 +42,7 @@ agents:
 # === 贡献类型定义 ===
 contribution_types:
   technique_card:
-    directory: "blackmule/techniques/{category}/"
+    directory: "techniques/{category}/"
     template: "templates/TECHNIQUE.yaml"
     required_fields:
       - id
@@ -58,7 +58,7 @@ contribution_types:
     validation: "scripts/validate.sh --type technique"
 
   case_study:
-    directory: "blackmule/cases/{type}/"
+    directory: "cases/{type}/"
     template: "templates/CASE.yaml"
     required_fields:
       - target
@@ -70,7 +70,7 @@ contribution_types:
     validation: "scripts/validate.sh --type case"
 
   knowledge_entry:
-    directory: "blackmule/knowledge-base/categories/"
+    directory: "knowledge/categories/"
     template: "templates/KNOWLEDGE_ENTRY.md"
     required_fields:
       - category
@@ -92,7 +92,7 @@ contribution_types:
       - authorization
 
   tool:
-    directory: "blackmule/tools/"
+    directory: "tools/"
     required_fields:
       - 可执行脚本
       - 内嵌使用说明
@@ -140,10 +140,12 @@ validation:
     - "category 必须在 categories 中定义"
     - "severity 必须是 critical/high/medium/low 之一"
     - "sources 必须非空"
+  knowledge_entry:
+    - "必须包含可观察信号、最小验证、证据判断、修复与复测"
   case_study:
     - "target 必须包含 url 或 type 字段"
     - "techniques_tried 必须包含至少一个条目的 result"
-    - "fingerprint_triggers 必须非空"
+    - "techniques_learned 和 fingerprint_triggers 为增强字段，缺失时警告"
   knowledge_entry:
     - "必须包含 KB-{CAT}-{NUM} 格式的编号"
     - "必须包含 CWE 编号引用"

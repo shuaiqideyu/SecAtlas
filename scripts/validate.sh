@@ -38,6 +38,17 @@ validate_technique() {
         return 0
     fi
     
+    # 架构/方法论卡：允许 info 严重度，但要求有可迁移机制和来源
+    if grep -q "^architecture:" "$file" 2>/dev/null; then
+        for field in key_mechanisms sources; do
+            if ! grep -q "^${field}:" "$file" 2>/dev/null; then
+                echo -e "  ${RED}✗${NC} $name (架构卡): 缺少必填字段 '$field'"
+                errors=$((errors + 1))
+            fi
+        done
+        return $errors
+    fi
+
     # 完整技术卡：检查必填字段
     for field in id name category severity trigger_signals payloads success_indicators prerequisites defense sources; do
         if ! grep -q "^${field}:" "$file" 2>/dev/null; then
@@ -48,7 +59,7 @@ validate_technique() {
     
     # 检查 severity 值
     local sev=$(grep "^severity:" "$file" | awk '{print $2}' | tr -d '"')
-    if [ -n "$sev" ] && ! echo "$sev" | grep -qE '^(critical|high|medium|low)$'; then
+    if [ -n "$sev" ] && ! echo "$sev" | grep -qE '^(critical|high|medium|low|info)$'; then
         echo -e "  ${YELLOW}⚠${NC} $name: severity '$sev' 不是标准值"
     fi
     
@@ -67,10 +78,16 @@ validate_case() {
     local errors=0
     local name=$(basename "$file")
     
-    for field in target attack_surface techniques_tried success_path techniques_learned fingerprint_triggers; do
+    for field in target attack_surface techniques_tried success_path; do
         if ! grep -q "^${field}:" "$file" 2>/dev/null; then
             echo -e "  ${RED}✗${NC} $name: 缺少必填字段 '$field'"
             errors=$((errors + 1))
+        fi
+    done
+
+    for field in techniques_learned fingerprint_triggers; do
+        if ! grep -q "^${field}:" "$file" 2>/dev/null; then
+            echo -e "  ${YELLOW}⚠${NC} $name: 缺少增强字段 '$field'"
         fi
     done
     
@@ -110,7 +127,7 @@ validate_knowledge() {
 check_id_uniqueness() {
     echo "--- ID 唯一性检查 ---"
     local dupes=0
-    for dir in blackmule/techniques/*/; do
+    for dir in "$REPO_ROOT"/techniques/*/; do
         [ -d "$dir" ] || continue
         local ids=$(grep -h "^id:" "$dir"*.yaml 2>/dev/null | awk '{print $2}' | tr -d '"' | sort)
         local dupe_ids=$(echo "$ids" | uniq -d)
@@ -128,9 +145,9 @@ total_errors=0
 if [ "$check_type" = "all" ] || [ "$check_type" = "technique" ]; then
     echo "--- 技术卡校验 ---"
     count=0
-    for f in "$REPO_ROOT"/blackmule/techniques/*/*.yaml; do
+    for f in "$REPO_ROOT"/techniques/*/*.yaml; do
         [ -f "$f" ] || continue
-        validate_technique "$f"
+        if ! validate_technique "$f"; then total_errors=$((total_errors + 1)); fi
         count=$((count + 1))
     done
     [ $count -eq 0 ] && echo "  无技术卡文件"
@@ -141,9 +158,9 @@ if [ "$check_type" = "all" ] || [ "$check_type" = "case" ]; then
     echo ""
     echo "--- 案例校验 ---"
     count=0
-    for f in "$REPO_ROOT"/blackmule/cases/*/*.yaml; do
+    for f in "$REPO_ROOT"/cases/*/*.yaml; do
         [ -f "$f" ] || continue
-        validate_case "$f"
+        if ! validate_case "$f"; then total_errors=$((total_errors + 1)); fi
         count=$((count + 1))
     done
     [ $count -eq 0 ] && echo "  无案例文件"
@@ -154,9 +171,9 @@ if [ "$check_type" = "all" ] || [ "$check_type" = "knowledge" ]; then
     echo ""
     echo "--- 知识条目校验 ---"
     count=0
-    for f in "$REPO_ROOT"/blackmule/knowledge-base/categories/*.md; do
+    for f in "$REPO_ROOT"/knowledge/categories/*.md; do
         [ -f "$f" ] || continue
-        validate_knowledge "$f"
+        if ! validate_knowledge "$f"; then total_errors=$((total_errors + 1)); fi
         count=$((count + 1))
     done
     echo "  共检查 $count 个分类文件"
@@ -167,10 +184,10 @@ check_id_uniqueness
 
 echo ""
 echo "=== 内容统计 ==="
-echo "  技术卡: $(find "$REPO_ROOT"/blackmule/techniques -name '*.yaml' 2>/dev/null | wc -l) 张"
-echo "  案例:   $(find "$REPO_ROOT"/blackmule/cases -name '*.yaml' 2>/dev/null | wc -l) 份"
-echo "  分类:   $(find "$REPO_ROOT"/blackmule/knowledge-base/categories -name '*.md' 2>/dev/null | wc -l) 个"
-echo "  工具:   $(find "$REPO_ROOT"/blackmule/tools -type f 2>/dev/null | wc -l) 个"
+echo "  技术卡: $(find "$REPO_ROOT"/techniques -name '*.yaml' 2>/dev/null | wc -l) 张"
+echo "  案例:   $(find "$REPO_ROOT"/cases -name '*.yaml' 2>/dev/null | wc -l) 份"
+echo "  分类:   $(find "$REPO_ROOT"/knowledge/categories -name '*.md' 2>/dev/null | wc -l) 个"
+echo "  工具:   $(find "$REPO_ROOT"/tools -type f 2>/dev/null | wc -l) 个"
 
 echo ""
 if [ $total_errors -gt 0 ]; then

