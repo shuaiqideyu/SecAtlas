@@ -45,12 +45,30 @@
 
 ## 工具矩阵
 
-| 工具 | 语言 | 覆盖能力 |
-|------|------|---------|
-| `jwt-analyzer.py` | Python | JWT 解码/漏洞检测/爆破 |
-| `cache-poison-detector.go` | Go | 缓存投毒 14 头并发探测 |
-| `js-extractor.py` | Python | JS 敏感信息提取(25 种模式) |
-| `redis-exploit.py` | Python | Redis 未授权利用(SSH/cron/shell) |
+### Python 工具
+
+| 工具 | 用途 | 用法 |
+|------|------|------|
+| `jwt-analyzer.py` | JWT 解码 + alg:none/RS→HS/KID 注入/弱密钥爆破 | `python3 jwt-analyzer.py <token> --test-none` |
+| `js-extractor.py` | JS 敏感信息提取（25 种正则：API Key/端点/密码/JWT/Firebase） | `python3 js-extractor.py https://target.com/app.js -r` |
+| `redis-exploit.py` | Redis 未授权利用（check/ssh-key/crontab/webshell/extract） | `python3 redis-exploit.py -H 10.0.0.5 ssh-key` |
+
+### Go 工具
+
+| 工具 | 用途 | 用法 |
+|------|------|------|
+| `cache-poison-detector.go` | 缓存投毒探测器（14 个 unkeyed 头并发探测 + 双阶段验证） | `go run cache-poison-detector.go -url https://target.com` |
+
+### Shell 脚本（维护用）
+
+| 脚本 | 用途 |
+|------|------|
+| `mule-auto-learn.sh` | 自动学习新知识入库 |
+| `mule-auto-maintain.sh` | 仓库自动维护 |
+| `mule-review-prs.sh` | PR 自动审查 |
+| `mule-merge-pr.sh` | PR 自动合并 |
+| `mule-comment-pr.sh` | PR 评论 |
+| `mule-tempmail.sh` | 临时邮箱工具 |
 
 ---
 
