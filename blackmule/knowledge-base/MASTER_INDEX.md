@@ -7,7 +7,7 @@
 - [`categories`](./categories/)：按漏洞类型整理的知识条目（14类 150+ 条目）。
 - [`techniques`](../techniques/)：可复用技术卡（11类 20+ 张）。
 - [`cases`](../cases/)：靶场、CTF 与 Pwn 案例。
-- [`../SKILL_INDEX.md`](../SKILL_INDEX.md)：黑骡安全 Skill 索引（45 个 / 12 类）。
+- [`../SKILL_INDEX.md`](../SKILL_INDEX.md)：黑骡安全 Skill 索引（46 个 / 12 类）。
 
 ## 分类速览
 

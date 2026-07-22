@@ -1,6 +1,6 @@
 # 黑骡 · 安全 Skill 索引
 
-> 自动生成于 2026-07-21 | 总计 **45** 个 Skill | 12 个分类
+> 自动生成于 2026-07-22 | 总计 **46** 个 Skill | 12 个分类
 >
 > 真源：`/root/.hermes/skills/security/`
 
@@ -19,7 +19,7 @@
 | 取证与事件响应 | 3 |
 | 威胁建模 | 1 |
 | 凭据与供应链 | 2 |
-| 工具与辅助 | 4 |
+| 工具与辅助 | 5 |
 
 ---
 
@@ -35,7 +35,7 @@
 | `ecc-ops` | 0.1.1 | 切换目标、重型扫描前的会话目标锁定与防串。 | session, target-lock, isolation, pentest, ECC |
 | `pentagi-lessons` | 0.7.2 | 长任务卡死、重复工具、5/10检查点、中断恢复与多Agent交接。 | planning, supervision, multi-agent, orchestration, evidence, recovery |
 | `pentest-cases` | 1.0.0 | 案例库与战术指纹匹配：记录每次攻击的成功/失败路径，新目标自动匹配历史经验推荐攻击链。 | cases, lessons, fingerprint, knowledge-base, pattern-matching |
-| `shannon-pipeline` | 1.0.0 | Shannon白盒AI渗透测试方法论——五阶段流水线。 | pentest, whitebox, pipeline, methodology, shannon |
+| `shannon-pipeline` | 1.0.0 | Shannon白盒AI渗透测试方法论——五阶段流水线（Pre-Recon→Recon→Vuln→Exploit→Report）。 | pentest, whitebox, pipeline, methodology, shannon |
 | `target-playbooks` | 0.5.3 | 目标类型未知时生成 T01-T17 或自创可证伪攻击角度卡。 | playbook, taxonomy, web, api, pentest |
 | `hexstrike-matrix` | 0.4.1 | 用户问用什么 Kali 工具时，按阶段/风险/证据选最小工具集。 | tools, hexstrike, evidence, recovery, recon |
 | `acs-playbooks` | 0.3.1 | 仅按指定主题读取 ACS 精选手册；不作为默认渗透入口。 | playbook, ACS, web, api, credentials, pentest, active-directory, aws, kubernetes |
@@ -47,7 +47,7 @@
 | --- | --- | --- | --- |
 | `recon-entry-ops` | 0.3.1 | 侦察与信息收集——子域名枚举、DNS查询、端口扫描、httpx探活、Katana爬虫、JS源码分析、目录爆破、指纹识别、Google Dork、资产测绘。 | recon, fofa, subdomain, httpx, katana, git, backup, cloud-storage, proxy |
 | `recon-apis` | 0.6.1 | 单次 FOFA/uncover/GoFOFA 查询、探活或 2captcha wrapper。 | FOFA, uncover, GoFOFA, httpx, katana, gau, 2captcha, OSINT, recon, captcha |
-| `osint-operations` | 1.0 | Comprehensive OSINT operations: external reconnaissance, domain enumeration, email harvesting, credential leak discovery, threat actor profiling. | — |
+| `osint-operations` | 1.0 | Comprehensive OSINT operations: external reconnaissance, domain enumeration, email harvesting, credential leak discovery, threat actor profiling, AI-driven cross-source correlation. | osint, reconnaissance, threat-intelligence, spiderfoot, theharvester, dnstwist, certificate-transparency, paste-monitoring, subdomain-enumeration, red-team |
 | `blackbox-artifacts` | 0.2.4 | 匿名公开 JS/source map/APK/字节码/镜像/SBOM 分析。 | blackbox, public-artifacts, source-map, mobile, bytecode, container, evidence |
 | `telegram-query-ops` | 1.1.1 | 查询 @/t.me/tg、Bot/频道/Mini App 公共 MTProto 元数据。 | telegram, mtproto, mini-app, bot, channel, public-metadata, query |
 | `cve-intelligence` | 1.0.0 | CVE漏洞查询与PoC检索——基于trickest/cve（16万条CVE/1999-2026）。 | cve, vulnerability, intelligence, poc, exploit |
@@ -56,7 +56,7 @@
 
 | Skill | 版本 | 描述 | 标签 |
 | --- | --- | --- | --- |
-| `web-api-ops` | 1.0.0 | Web与API安全测试——SQL注入/XSS/SSRF/SSTI/命令注入/文件包含/IDOR越权/JWT攻击/OAuth/OIDC/CORS/CSRF/GraphQL/反序列化/请求走私/XXE。含完整payload库（SecAtlas 2646行）。 | web, api, jwt, oauth, ssrf, graphql, idor, secrets |
+| `web-api-ops` | 1.0.0 | Web与API安全测试——SQL注入/XSS/SSRF/SSTI/命令注入/文件包含/IDOR越权/JWT攻击/OAuth/OIDC/CORS/CSRF/GraphQL/反序列化/请求走私/XXE。含完整payload库。 | web, api, jwt, oauth, ssrf, graphql, idor, secrets |
 | `web-runtime-security` | 0.1.2 | Next/Nuxt SSR、RSC、缓存、WebSocket/SSE 授权测试。 | nextjs, nuxt, ssr, react-server-components, graphql, websocket, sse, cache-security |
 | `high-value-assessment` | 0.3.1 | 凭证/后台/API越权/支付/Web3 六类高价值路径选择。 | authorized-assessment, secrets, admin, api, jwt, oauth, payment, web3, evidence |
 | `bug-bounty-methodology` | 1.0.0 | 漏洞赏金方法论——从侦察到报告的完整赏金猎人工作流，含高星项目经验总结。 | bug-bounty, methodology, recon, automation, reporting |
@@ -65,8 +65,8 @@
 
 | Skill | 版本 | 描述 | 标签 |
 | --- | --- | --- | --- |
-| `cloud-security-aws` | 1.0 | Comprehensive AWS cloud security — IAM hardening, S3 auditing, CloudTrail/GuardDuty, offensive testing (Pacu/CloudFox/ScoutSuite), Lambda/serverless, KMS, WAF, EKS. Merged from 90+ Anthropic cybersecurity skills. | — |
-| `cloud-security-azure-gcp` | 1.0 | Azure与GCP云安全——Azure安全中心/Defender/Entra ID IAM/PIM/Conditional Access/Sentinel SIEM/ROADtools/AADInternals攻击/GCP IAM审计/Organization Policy/Forseti/SCC/VPC防火墙。 | — |
+| `cloud-security-aws` | 1.0 | Comprehensive AWS cloud security — IAM hardening, S3 auditing, CloudTrail/GuardDuty, offensive testing (Pacu/CloudFox/ScoutSuite), Lambda/serverless, KMS, WAF, EKS. Merged from 90+ Anthropic skills. | aws, cloud-security, iam, s3, pacu, cloudtrail, guardduty, security-hub, containers, kubernetes, eks, lambda |
+| `cloud-security-azure-gcp` | 1.0 | Azure与GCP云安全——Azure安全中心/Defender/Entra ID IAM/PIM/Conditional Access/Sentinel SIEM/ROADtools/AADInternals攻击/GCP IAM审计/Organization Policy/Forseti/SCC/VPC防火墙。 | azure, gcp, entra-id, defender-for-cloud, sentinel, roadtools, forseti, organization-policy, iam, conditional-access, cloud-security |
 | `container-kubernetes-security` | 1.0.0 | 容器与Kubernetes安全——K8s集群渗透/Docker逃逸/特权容器/镜像漏洞扫描Trivy/Grype/Pod安全策略/NetworkPolicy/RBAC滥用/kubelet攻击/etcd未授权/Wazuh SIEM。 | kubernetes, container, docker, escape, xdr, siem, security |
 
 ## AD与内网渗透
@@ -104,7 +104,7 @@
 | --- | --- | --- | --- |
 | `forensic-analysis` | 1.0.0 | 数字取证与事件响应DFIR——内存取证/Volatility/磁盘取证/Autopsy/网络取证/Wireshark/时间线分析Plaso/端点取证KAPE/证据收集/数据恢复/浏览器取证/邮件取证/移动取证/云取证。 | forensics, dfir, memory-forensics, disk-forensics, network-forensics, cloud-forensics, timeline, evidence-collection, file-recovery, volatility, plaso, kape, wireshark, autopsy |
 | `incident-response` | 1.0.0 | 事件响应与应急处理——安全事件分类分级/遏制/根除/恢复/NIST 800-61/SANS PICERL/SOC运营/钓鱼事件/勒索软件/云安全事件/数据泄露处置。 | incident-response, triage, containment, eradication, recovery, nist-800-61, sans-picerl, soc, phishing, ransomware, cloud-ir, playbook, breach |
-| `threat-hunting` | 1.0 | 威胁狩猎——主动假设驱动的威胁搜索，覆盖SIEM/EDR(Elastic/Splunk)、YARA/Sigma规则、LOLBin/持久化/C2/Webshell检测、APT TTP分析(MITRE ATT&CK)、MISP威胁情报、基础设施追踪。 | — |
+| `threat-hunting` | 1.0 | 威胁狩猎——主动假设驱动的威胁搜索，覆盖SIEM/EDR(Elastic/Splunk)、YARA/Sigma规则、LOLBin/持久化/C2/Webshell检测、APT TTP分析(MITRE ATT&CK)、MISP威胁情报、基础设施追踪。 | threat-hunting, siem, edr, yara, sigma, mitre-attack, lolbins, misp, detection-engineering |
 
 ## 威胁建模
 
@@ -123,10 +123,11 @@
 
 | Skill | 版本 | 描述 | 标签 |
 | --- | --- | --- | --- |
-| `temp-email` | 1.0.0 | 临时邮箱/一次性邮箱——GuerrillaMail自动创建/检查/等待邮件。 | temp-email, disposable, guerrilla, registration, verification |
+| `temp-email` | 1.0.0 | 临时邮箱/一次性邮箱——GuerrillaMail自动创建/检查/等待邮件，用于注册验证、密码重置等场景。 | temp-email, disposable, guerrilla, registration, verification |
 | `proxy-pool` | 0.3.1 | 地区限制、固定出口、会话粘性与代理故障切换用 mule-proxy。 | proxy, socks5, http-proxy, egress, authorized-testing |
 | `telegram-platform-security` | 0.1.7 | Telegram平台安全测试——Webhook注入/Login Widget安全/Mini App安全/MTProto协议/机器人API安全/Bot Token泄露/客户端安全。 | telegram, bot-api, webhook, oidc, mini-app, mtproto, client-security |
-| `red-team-arsenal` | 1.0.0 | 红队工具武器库——按杀伤链阶段编排的工具清单。含Sliver/Havoc/Cobalt Strike/Impacket/Mimikatz/BloodHound/CrackMapExec。 | red-team, arsenal, kill-chain, tools, adversary-simulation |
+| `red-team-arsenal` | 1.0.0 | 红队工具武器库——按杀伤链阶段（侦察→初始访问→执行→持久化→提权→防御规避→凭据访问→横向移动→C2→数据外泄）编排的工具清单。含Sliver/Havoc/Cobalt Strike/Impacket/Mimikatz/BloodHound/CrackMapExec。 | red-team, arsenal, kill-chain, tools, adversary-simulation |
+| `gambling-platform-attack-surface` | 0.1.0 | 博彩/灰产Telegram Mini App平台标准攻击面测绘与利用流程——汇率操纵、支付网关劫持、配置读写。CW6.cc实战验证。 | gambling, telegram-mini-app, business-logic, ruoyi, config-manipulation |
 
 ---
 

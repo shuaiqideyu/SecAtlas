@@ -127,7 +127,7 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 | **Techniques** | 可复用技术卡 | 11 类 26 张 | [技术卡目录](./blackmule/techniques/) |
 | **Cases** | 完整攻击案例 | 7 份 | [案例目录](./blackmule/cases/) |
 | **Tools** | Agent 工具脚本 | 1 个 | [工具目录](./blackmule/tools/) |
-| **Skills** | Agent 安全 Skill 索引 | 45 个 / 12 类 | [Skill 索引](./blackmule/SKILL_INDEX.md) |
+|| **Skills** | Agent 安全 Skill 索引 | 46 个 / 12 类 | [Skill 索引](./blackmule/SKILL_INDEX.md) |
 
 ## 内容标准
 

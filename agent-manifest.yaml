@@ -4,9 +4,9 @@
 version: "1.0.0"
 repository: "https://github.com/shuaiqideyu/SecAtlas"
 maintainer: "BlackMule（黑骡）"
-last_sync: "2026-07-21"
+last_sync: "2026-07-22"
 skills_count: 46
-skill_categories: 13
+skill_categories: 12
 
 # === 已注册 Agent ===
 agents:
