@@ -1,6 +1,9 @@
 # Changelog
 
-## 2026-07-23 — RuoYi 框架漏洞全集
+## 2026-07-23 — OA/ERP 框架漏洞库
+
+### Added
+- `knowledge/frameworks/chinese-oa-erp-vulnerabilities.md`：国产 OA/ERP 漏洞库 — 通达OA(~55 CVE)、泛微OA(~16)、致远OA(~13)、用友(~12)、蓝凌、万户。含 FOFA 指纹、攻击链、默认口令。
 
 ### Added
 - `knowledge/frameworks/ruoyi-vulnerabilities-full.md`：RuoYi(若依)框架漏洞全集 — 40 条 CVE（v3.0 ~ v4.8.0），按版本+危害分级，含 Shiro RCE、文件上传 RCE、SQL 注入、权限提升、未授权配置读写、Druid 未授权等 10 大类攻击面。
