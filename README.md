@@ -111,6 +111,7 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 | **云身份** | [元数据与工作负载身份](./references/cloud-metadata/) | 元数据入口、身份交换、云 IAM 与低影响验证 |
 | **供应链** | [SBOM/签名/来源证明](./references/sbom-supply-chain/) | SBOM、VEX、Sigstore、in-toto、SLSA 与消费策略 |
 | **框架漏洞** | [RuoYi 漏洞全集](./knowledge/frameworks/ruoyi-vulnerabilities-full.md) | 40 条 CVE + Shiro RCE/文件上传/SQL 注入/权限提升/未授权配置读写 |
+| **渗透工具库** | [工具清单](./references/pentest-tools-library.md) | Go/Python/Shell 全阶段工具 — 侦察→扫描→漏洞专项→国内框架→自动化 |
 | **投毒作战** | [poison-ops](./techniques/) | 缓存/日志/DNS-ARP/CI-CD/Session/数据层 6 链 |
 | **红队工具** | [工具集](./tools/) | Python: jwt-analyzer / js-extractor / redis-exploit · Go: cache-poison-detector · Shell: mule-* ×6 |
 
