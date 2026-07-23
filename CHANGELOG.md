@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-07-23 — RuoYi 框架漏洞全集
+
+### Added
+- `knowledge/frameworks/ruoyi-vulnerabilities-full.md`：RuoYi(若依)框架漏洞全集 — 40 条 CVE（v3.0 ~ v4.8.0），按版本+危害分级，含 Shiro RCE、文件上传 RCE、SQL 注入、权限提升、未授权配置读写、Druid 未授权等 10 大类攻击面。
+- `techniques/auth/ruoyi-captcha-bypass-2captcha.yaml`：RuoYi 验证码绕过技术卡（2captcha OCR）
+- `techniques/api-bypass/ruoyi-unauth-config-write.yaml`：RuoYi 未授权配置读写技术卡
+
+### Changed
+- README：技术卡 37→40，知识条目 15→16，新增「框架漏洞」专区
+
 ## 2026-07-23 — AI Agent/MCP 闭环与校验修复
 
 ### Added

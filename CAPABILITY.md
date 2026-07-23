@@ -7,8 +7,8 @@
 | 资产 | 数量 | 位置 |
 |------|------|------|
 | Hermes Skill | 47 | `/root/.hermes/skills/security/` |
-| 技术卡 (YAML) | 37 | `techniques/` — 20 个分类 |
-| 知识条目 (MD) | 16 | `knowledge/categories/` — PortSwigger/OWASP/Agent 安全蒸馏 |
+| 技术卡 (YAML) | 40 | `techniques/` — 21 个分类 |
+| 知识条目 (MD) | 16 | `knowledge/categories/` + `knowledge/frameworks/` |
 | 实战工具 | 11 | `tools/` — Python/Go/Shell |
 | 案例 | 11 | `cases/` — 授权/CTF/Lab/PWN |
 | 深度专题 | 56 篇 | `references/` — 10 个专题 |
@@ -38,6 +38,7 @@
 | **agentic-ai** | 1 (Agent/MCP 控制闭环) | `ai-agent-security-assessment` / `agent-self-check` |
 | **api-bypass** | 3 (AES绕过/汇率操纵/Ruoyi配置) | `chain-ops` |
 | **auth** | 2 (JS凭证/验证码绕过) | `cred-hunt` |
+| **framework** | 1 (RuoYi 40 CVE 全集) | — |
 | **recon** | 1 (JS控制器枚举) | `recon-entry-ops` |
 | **waf-bypass** | 1 (内联注释) | `chain-ops` |
 | **pwn** | 1 (PHP off-by-one) | `binary-exploitation` |
