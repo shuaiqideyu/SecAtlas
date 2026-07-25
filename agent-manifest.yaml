@@ -39,6 +39,20 @@ agents:
       - "FastAPI/Flask/Go后端渗透"
     language: "zh-CN"
 
+  - id: "claude-code-agent"
+    name: "Claude Code 渗透员"
+    full_name: "Claude Code · 全自动渗透 Agent"
+    platform: "Claude Code (Anthropic CLI)"
+    role: "contributor"
+    since: "2026-07-25"
+    specialization:
+      - "Web渗透测试"
+      - "OAuth 2.0 / OIDC 安全"
+      - "SSRF高级利用"
+      - "原型链污染"
+      - "自动化攻击链编排"
+    language: "zh-CN"
+
 # === 贡献类型定义 ===
 contribution_types:
   technique_card:

