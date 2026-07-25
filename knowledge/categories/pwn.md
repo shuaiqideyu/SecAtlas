@@ -8,11 +8,12 @@
 ### [KB-PWN-01] PHP zend_mm Off-by-one 堆溢出
 - **类别**: PWN / 堆利用
 - **信号**: `X-PHP-Version` header；debug 输出 input_len 或 strlen；自定义 .so PHP 扩展；`X-Alloc-Bins` header
-- **原理**: PHP 扩展使用 `_emalloc(n)` 但写入 n+1 字节，null byte 溢出到相邻 heap chunk metadata。PHP 8.1 zend_mm allocator 中可导致 free list corruption。
-- **检测**: 对每个 bin 边界值 (8,16,24,...,2048) 发送 `len(u)+len(p)=bin-1` 的输入，观察响应体大小是否差 1 字节
-- **利用**: 目标：覆盖 `return_value->u1.type_info` 从 `IS_FALSE(0x2)` 到 `IS_TRUE(0x3)`。路径：off-by-one → 破坏相邻 chunk → free list corruption → `_emalloc` 返回栈地址 → 写入 IS_TRUE
-- **修复**: 代码审计确保分配与实际写入匹配；使用安全内存分配 API
-- **参考**: CWE-122 / CWE-193 / Echoes of Heap 案例
+- **原理**: PHP 扩展使用 `_emalloc(n)` 但写入 n+1 字节，null byte 溢出到相邻 heap slot 的 next_free_slot 指针 LSB。PHP 8.1 zend_mm allocator 中可导致 free list corruption。**仅当 N+1 == bin_size 时触发**（非所有边界）。
+- **检测**: 对每个 bin 边界值发送 `len(u)+len(p)=bin_size-1` 的输入，观察响应体大小是否差 1 字节
+- **利用**: 目标：覆盖 `return_value->u1.type_info` 从 `IS_FALSE(0x2)` 到 `IS_TRUE(0x3)`。路径：off-by-one → 破坏相邻 free slot LSB → free list corruption → chain → `_emalloc` 返回目标地址 → 写入 IS_TRUE。**关键发现**: PHP VM 栈由 zend_mm 堆分配，return_value 在堆上（非系统栈），理论可及。**核心阻塞**: 函数末尾 `movl $0x2, 0x8(%rbp)` 必定覆盖 return_value。**替代目标**: `sapi_module.ub_write` 函数指针。
+- **相关 CVE**: CVE-2022-31626 — PHP mysqlnd heap buffer overflow 使用同类技术（POST 变量堆整形 + fake free slot + zend_string overlap）
+- **修复**: 代码审计确保分配与实际写入匹配；使用安全内存分配 API；隐藏 debug 信息
+- **参考**: CWE-122 / CWE-193 / Echoes of Heap 案例 (v1+v2) / CFandR-github/PHP-binary-bugs
 
 ### [KB-PWN-02] 栈缓冲区溢出 (Stack Buffer Overflow)
 - **类别**: PWN / 栈利用
