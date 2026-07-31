@@ -125,6 +125,7 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 - **案例复盘**：[`cases/`](./cases/) — 11 个攻防案例
 - **外部备份**：[`mirrors/`](./mirrors/) — codex/claude/zcode keysmith
 
+[Dark-Moon](https://github.com/ASCIT31/Dark-Moon)：开源 (GPL-3.0) 的自主 AI 渗透测试平台，覆盖 Web、API、Active Directory 和 Kubernetes，可自托管并提供利用验证，适合在获得授权的合法靶场中练习。
 ## 🛠️ 工具集
 
 | 工具 | 语言 | 描述 |
