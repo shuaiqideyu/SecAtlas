@@ -23,4 +23,7 @@ jobs:
           done
       - name: Check broken links
         run: |
-          ! grep -rn "blackmule/" README.md CAPABILITY.md MASTER_INDEX.md AGENTS.md || exit 0
+          if grep -rn "blackmule/" README.md CAPABILITY.md MASTER_INDEX.md AGENTS.md; then
+            echo "Found stale blackmule/ path references"
+            exit 1
+          fi
