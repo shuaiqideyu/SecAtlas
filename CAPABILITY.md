@@ -7,7 +7,7 @@
 | 资产 | 数量 | 位置 |
 |------|------|------|
 | Hermes Skill | 47 | `/root/.hermes/skills/security/` |
-| 技术卡 (YAML) | 40 | `techniques/` — 21 个分类 |
+| 技术卡 (YAML) | 38 | `techniques/` — 21 个分类 |
 | 知识条目 (MD) | 16 | `knowledge/categories/` + `knowledge/frameworks/` |
 | 实战工具 | 11 | `tools/` — Python/Go/Shell |
 | 案例 | 11 | `cases/` — 授权/CTF/Lab/PWN |

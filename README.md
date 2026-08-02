@@ -43,7 +43,7 @@
 
 | 技术卡 | 知识条目 | 案例 | 专题 | 工具 | Skill | 镜像 |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| **40** | **16** | **11** | **53篇/10专题** | **11** | **47** | **3** |
+| **38** | **16** | **11** | **53篇/10专题** | **10** | **47** | **3** |
 
 📊 [CAPABILITY.md](./CAPABILITY.md) — 完整能力索引
 
@@ -119,7 +119,7 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 
 - **AI Agent 入口**：[`AGENTS.md`](./AGENTS.md) / [`CAPABILITY.md`](./CAPABILITY.md)
 - **AI Agent/MCP 专题**：[`references/agentic-ai/`](./references/agentic-ai/) — 工具供应链、权限、注入、循环控制、证据与复测
-- **实战技术卡**：[`techniques/`](./techniques/) — 37 张 YAML 技术卡，含触发信号/payload/判据
+- **实战技术卡**：[`techniques/`](./techniques/) — 38 张 YAML 技术卡，含触发信号/payload/判据
 - **深度专题**：[`references/`](./references/) — 10 个专题 56 篇文档
 - **知识蒸馏**：[`knowledge/`](./knowledge/) — 16 个分类 150+ 条目
 - **案例复盘**：[`cases/`](./cases/) — 11 个攻防案例
