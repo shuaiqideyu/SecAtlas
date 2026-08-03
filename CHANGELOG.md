@@ -35,7 +35,7 @@
 - `.editorconfig`
 
 ### Changed
-- Repo root restructured: `blackmule/*` → top-level `techniques/`, `cases/`, `knowledge/`, `references/`, `tools/`
+- Repo root restructured: `mule/*` → top-level `techniques/`, `cases/`, `knowledge/`, `references/`, `tools/`
 - `knowledge-base/` → `knowledge/`
 - Chinese directory names in `references/` → English
 - `README.md` fully rewritten with updated paths and stats
@@ -48,7 +48,7 @@
 - All case files sanitized (TARGET_HOST placeholder)
 
 ### Removed
-- `blackmule/` container directory
+- `mule/` container directory
 - Chinese-named technique cards (renamed)
 - Case-derived duplicate technique cards (3)
 - Stale README references to pre-restructure paths

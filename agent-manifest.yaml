@@ -3,16 +3,16 @@
 
 version: "1.0.0"
 repository: "https://github.com/shuaiqideyu/SecAtlas"
-maintainer: "BlackMule（黑骡）"
+maintainer: "骡子（骡子）"
 last_sync: "2026-07-23"
 skills_count: 47
 skill_categories: 12
 
 # === 已注册 Agent ===
 agents:
-  - id: "blackmule"
-    name: "黑骡"
-    full_name: "BlackMule · 武官"
+  - id: "mule"
+    name: "骡子"
+    full_name: "骡子 · 武官"
     platform: "Hermes Agent (Nous Research)"
     role: "maintainer"
     since: "2026-07-20"
