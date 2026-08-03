@@ -1,4 +1,4 @@
-# 黑骡渗透知识库
+# 骡子渗透知识库
 
 > 来源：公开靶场、OWASP、PortSwigger、HackTricks、PayloadsAllTheThings 与公开规范
 > 最后更新：2026-07-23
@@ -10,7 +10,7 @@
 - [`cases/`](./cases/)：靶场、CTF 与授权实战案例（15 个）。
 - [`references/`](./references/)：深度专题文档（SQL注入/WebSocket/云元数据/SBOM供应链/DNS/TLS/OAuth/Passkey/请求走私/AI Agent，共 10 个专题、56 篇文档）。
 - [`mirrors/`](./mirrors/)：外部仓库镜像备份（codex-keysmith/claude-keysmith/zcode-keysmith）。
-- [`SKILL_INDEX.md`](./SKILL_INDEX.md)：黑骡安全 Skill 索引（47 个 / 12 类）。
+- [`SKILL_INDEX.md`](./SKILL_INDEX.md)：骡子安全 Skill 索引（47 个 / 12 类）。
 
 ## 快速导航
 
