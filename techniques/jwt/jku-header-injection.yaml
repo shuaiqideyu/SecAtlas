@@ -1,0 +1,78 @@
+# 技术卡片: JWT - jku 头注入
+# 分类: jwt / header-injection
+# 版本: 1.0
+# 日期: 2026-08-05
+# 来源: RFC 7515 / RFC 8725 / PortSwigger
+
+id: "jwt-jku-header-injection"
+name: "JWT jku 头注入与攻击者控制的 JWKS"
+category: "jwt"
+subcategory: "header-injection"
+severity: "critical"
+
+description: |
+  服务端根据 JWT header 中用户可控的 jku (JWK Set URL) 获取验签密钥，
+  但未对 URL 的来源、协议、重定向和最终地址实施严格白名单校验。
+  攻击者可发布自有 JWKS、用对应私钥签名篡改后的 JWT，并让服务端从
+  ATTACKER_JWKS_URL 取得攻击者公钥，从而绕过签名信任边界。
+
+trigger_signals:
+  - "JWT header 含 jku 或 x5u 远程密钥引用字段"
+  - "替换 jku 后服务端会向外部 JWKS 地址发起请求"
+  - "jku 指向不同主机时，错误从连接失败变为 kid 或签名相关错误"
+  - "允许通过重定向、userinfo 或子域差异绕过 JWKS 主机校验"
+
+payloads:
+  - technique: "攻击者控制的 JWKS"
+    payload: '{"alg":"RS256","typ":"JWT","kid":"ATTACKER_KEY_ID","jku":"https://ATTACKER_JWKS_URL/jwks.json"}'
+    note: "在 jwks.json 发布与签名私钥配对的公钥，并保持 kid 一致"
+  - technique: "受控重定向验证"
+    payload: '{"jku":"https://ALLOWED_HOST/REDIRECT_PATH?next=https://ATTACKER_JWKS_URL/jwks.json","kid":"ATTACKER_KEY_ID"}'
+    note: "用于确认校验发生在重定向前还是最终 URL；所有地址使用测试占位符"
+  - technique: "URL 解析差异验证"
+    payload: '{"jku":"https://ALLOWED_HOST@ATTACKER_JWKS_URL/jwks.json","kid":"ATTACKER_KEY_ID"}'
+    note: "仅用于检测字符串前缀校验与标准 URL 解析结果是否不一致"
+
+success_indicators:
+  - "服务端请求 ATTACKER_JWKS_URL 并按 ATTACKER_KEY_ID 选取公钥"
+  - "由攻击者私钥签名的篡改 JWT 被受保护端点接受"
+  - "仅恢复原始 jku 后，同一篡改 JWT 返回签名验证失败"
+  - "响应从 401/403 变为 200，且权限声明变化可被服务端观察到"
+
+prerequisites:
+  - "服务端支持并信任 JWT header 中的 jku 或等价远程密钥引用"
+  - "服务端未将 JWKS 地址固定为本地配置或严格的规范化白名单"
+  - "验证端可访问 ATTACKER_JWKS_URL 或可被允许地址重定向到该地址"
+  - "攻击者可生成密钥对，并控制 JWT 的 header、payload 与签名"
+
+upgrade_paths:
+  - "修改 sub、role、scope 等声明，验证授权边界是否随伪造令牌提升"
+  - "检查 x5u、kid 与 jku 是否共享同一套不安全的密钥选择逻辑"
+  - "结合缓存行为验证恶意 JWKS 是否会影响后续令牌验证"
+
+defense:
+  - "在服务端配置中固定受信任的 JWKS URI，不接受令牌携带的任意 jku/x5u"
+  - "如业务必须支持远程引用，规范化 URL 后对白名单中的 scheme、host、port 和 path 做精确匹配"
+  - "拒绝重定向、userinfo、非 HTTPS、IP 字面量和解析后落入私网或链路本地网段的地址"
+  - "将 issuer、audience、允许算法与密钥集合绑定校验，避免仅凭 kid 选择任意来源的密钥"
+  - "对 JWKS 获取设置超时、大小限制、缓存边界和出站网络策略，并记录异常密钥源"
+
+sources:
+  - agent: "Codex GPT-5.6 Sol"
+    date: "2026-08-05"
+  - ref: "RFC 7515 Section 4.1.2: https://www.rfc-editor.org/rfc/rfc7515#section-4.1.2"
+  - ref: "RFC 8725 Section 3.4: https://www.rfc-editor.org/rfc/rfc8725#section-3.4"
+  - ref: "PortSwigger JWT attacks: https://portswigger.net/web-security/jwt#injecting-self-signed-jwts-via-the-jku-parameter"
+  - ref: "CWE-347: https://cwe.mitre.org/data/definitions/347.html"
+
+tools:
+  - "jwt_tool"
+  - "Burp Suite Repeater"
+  - "Local JWKS fixture"
+
+confidence: "high"
+
+limitations:
+  - "对 jku 使用严格固定白名单且禁用重定向时不可用"
+  - "验证端无外网访问且只使用预配置密钥时不可用"
+  - "部分实现忽略 jku，仅依据服务端配置的 issuer 和 kid 选择密钥"

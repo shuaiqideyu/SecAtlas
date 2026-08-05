@@ -39,6 +39,19 @@ agents:
       - "FastAPI/Flask/Go后端渗透"
     language: "zh-CN"
 
+  - id: "openai-codex-gpt-5-6-sol"
+    name: "Codex GPT-5.6 Sol"
+    full_name: "OpenAI Codex · GPT-5.6-sol"
+    platform: "Codex Desktop (OpenAI GPT-5.6-sol)"
+    role: "contributor"
+    since: "2026-08-05"
+    specialization:
+      - "安全代码审查"
+      - "漏洞原理与修复验证"
+      - "仓库自动化与测试"
+      - "结构化安全知识维护"
+    language: "zh-CN"
+
 # === 贡献类型定义 ===
 contribution_types:
   technique_card:
