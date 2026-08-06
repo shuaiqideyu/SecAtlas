@@ -117,4 +117,5 @@ exploit_proven:
     evidence: "poc_full.js + steal_log.txt（本地证据）"
   - chain: "getInfo哈希泄露 -> 离线破解"
     date: "2026-08-06"
-    detail: "bcrypt.checkpw秒级命中弱口令（已打码）；撞库admin未中(密码不复用)"
+    detail: "bcrypt.checkpw秒级命中弱口令（已打码）；撞库admin未中(密码不复用)。
+    rating_note: "低危设计缺陷——getInfo仅返回自己账号哈希，独立利用价值≈0；高危版本(管理接口批量拉哈希/IDOR)均已修复。仅作链A下游辅助(窃取token后破解明文撞库)"
