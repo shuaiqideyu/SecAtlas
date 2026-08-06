@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-06 — USDT Approval 假充值事故复盘入库（链上对账新攻击面）
+
+### Added
+- `cases/authorized/20260730-case-usdt-approval-fake-deposit.yaml`：USDT approve 伪装充值上分事故复盘——对账兜底未过滤事件类型，授权额度被误识别为充值（16000 USDT → 108000 CNY 资损）。
+- `techniques/blockchain/usdt-approve-fake-deposit.yaml`：技术卡（方法选择器 095ea7b3 vs a9059cbb、事件 topic 判定、修复校验链）。
+- `knowledge/categories/blockchain.md`：新知识分类「区块链充值对账安全」（KB-BLK-01）。
+- 索引同步：技术卡 38→39、知识 16→17 类、案例 13→14。
+
 ## 2026-08-06 — 六合彩站复测与会话劫持利用链
 
 ### Added

@@ -7,10 +7,10 @@
 | 资产 | 数量 | 位置 |
 |------|------|------|
 | Hermes Skill | 4 当前活跃（47 历史快照） | `/root/.hermes/skills/security/` |
-| 技术卡 (YAML) | 38 | `techniques/` — 21 个分类 |
-| 知识条目 (MD) | 16 | `knowledge/categories/` + `knowledge/frameworks/` |
+| 技术卡 (YAML) | 39 | `techniques/` — 22 个分类 |
+| 知识条目 (MD) | 17 | `knowledge/categories/` + `knowledge/frameworks/` |
 | 实战工具 | 11 | `tools/` — Python/Go/Shell |
-| 案例 | 13 | `cases/` — 授权/CTF/Lab/PWN |
+| 案例 | 14 | `cases/` — 授权/CTF/Lab/PWN |
 | 深度专题 | 57 篇 | `references/` — 10 个专题 |
 | 镜像备份 | 3 | `mirrors/` — keysmith 系列 |
 
@@ -159,6 +159,7 @@
 | IDOR | `knowledge/categories/idor.md` | 3 |
 | PWN | `knowledge/categories/pwn.md` | 5 |
 | 综合技巧 | `knowledge/categories/misc.md` | 12 |
+| 区块链 | `knowledge/categories/blockchain.md` | 1 |
 | AI Agent/MCP | `knowledge/categories/agentic-ai.md` | 1 |
 | 工具清单 | `knowledge/categories/tool-checklist-9phase.md` | 9 阶段 |
 
