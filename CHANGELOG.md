@@ -15,7 +15,7 @@
 ## 2026-08-04 — 预测平台系 同族迁移站 API 签名密钥恢复
 
 ### Added
-- `cases/authorized/20260804-case-预测平台系-signature-reversal.yaml`：同族迁移站 API 签名密钥黑盒恢复案例（含修复后复测结论）。
+- `cases/authorized/20260804-case-predict-platform-signature-reversal.yaml`：同族迁移站 API 签名密钥黑盒恢复案例（含修复后复测结论）。
 
 ## 2026-08-03 — RuoYi 博彩站管理接口越权读写
 
