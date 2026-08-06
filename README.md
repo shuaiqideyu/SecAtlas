@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./assets/brand/secatlas-cover.svg" alt="SecAtlas 网络渗透知识库" width="100%" />
 
-  <p><strong>面向安全学习者、工程师与多 AI Agent 的结构化中文网络渗透知识库</strong></p>
+  <p><strong>结构化中文网络渗透知识库：技术卡、专题、案例与多 Agent 协作维护</strong></p>
 
   <p>
     <a href="#项目概览">项目概览</a>
@@ -12,9 +12,9 @@
     <span>&nbsp;·&nbsp;</span>
     <a href="#精选入口">精选入口</a>
     <span>&nbsp;·&nbsp;</span>
-    <a href="#骡子知识中枢">骡子知识中枢</a>
+    <a href="#工具集">工具集</a>
     <span>&nbsp;·&nbsp;</span>
-    <a href="#学习路线">学习路线</a>
+    <a href="#内容标准">内容标准</a>
   </p>
 
   <p>
@@ -24,16 +24,16 @@
     <a href="https://github.com/shuaiqideyu/SecAtlas/forks">
       <img alt="GitHub Forks" src="https://img.shields.io/github/forks/shuaiqideyu/SecAtlas?style=for-the-badge&logo=github&label=Forks&color=35C9DC&labelColor=07131F" />
     </a>
-    <img alt="Maintained by 骡子" src="https://img.shields.io/badge/MAINTAINED_BY-MULE-D7B468?style=flat-square&labelColor=07131F" />
+    <img alt="Author @yuuu" src="https://img.shields.io/badge/AUTHOR-@yuuu-D7B468?style=flat-square&labelColor=07131F" />
     <img alt="AI Collaborative" src="https://img.shields.io/badge/AI_COLLABORATIVE-✓-35C9DC?style=flat-square&labelColor=07131F" />
   </p>
+
+  <p><strong>作者</strong>：<a href="https://t.me/yuuu">Telegram @yuuu</a></p>
 </div>
 
 ## 项目概览
 
-**SecAtlas** 以企业级内容治理方式组织网络渗透知识，将分散的技术资料统一为可检索、可复核、可持续维护的学习体系。
-
-**v2.0 新增：多 AI Agent 协作支持。** 不再只是人类→知识库的单向流动，而是多个 Agent（Hermes、OpenClaw、Cursor、Claude Code 等）共同学习、共同维护的知识共同体。
+**SecAtlas** 把网络渗透知识整理成可检索、可复核、可持续维护的体系：技术卡、深度专题、案例复盘与工具脚本统一入库，并支持多个 AI Agent 共同学习、共同维护。
 
 每个专题围绕一条完整闭环展开：
 
@@ -125,7 +125,7 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 - **案例复盘**：[`cases/`](./cases/) — 16 个攻防案例（含 20260803 RuoYi 博彩、20260804 预测平台系、20260806 六合彩站复测、20260730 USDT 假充值）
 - **外部备份**：[`mirrors/`](./mirrors/) — codex/claude/zcode keysmith
 
-## 🛠️ 工具集
+## 工具集
 
 | 工具 | 语言 | 描述 |
 |------|------|------|
@@ -150,14 +150,10 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 | **修复可落地** | 从漏洞根因提出修复方案，并使用相同条件完成复测 |
 | **格式可校验** | 通过 `bash scripts/validate.sh` 自动检查 |
 
-## 许可与使用
+## License
 
 SecAtlas 用于网络安全学习、授权评估、代码审计与防护研究。仓库包含原创整理与不同许可条件的公开资料，详情见 [`LICENSES.md`](./LICENSES.md)。
 
----
+独立知识项目，与 OWASP、MITRE、NIST 及所引用上游项目无隶属关系。仓库内「骡子」为自动化维护 Agent，作者为 [@yuuu](https://t.me/yuuu)。
 
-<div align="center">
-  <strong>Built for security practitioners. Maintained by 骡子. Open to all AI agents.</strong>
-  <br />
-  <sub>SecAtlas is an independent knowledge project and is not affiliated with OWASP, MITRE, NIST, or referenced upstream projects.</sub>
-</div>
+**作者**：[Telegram @yuuu](https://t.me/yuuu)
