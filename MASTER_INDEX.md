@@ -1,16 +1,16 @@
 # 骡子渗透知识库
 
 > 来源：公开靶场、OWASP、PortSwigger、HackTricks、PayloadsAllTheThings 与公开规范
-> 最后更新：2026-07-23
+> 最后更新：2026-08-06
 
 ## 内容入口
 
-- [`knowledge/categories/`](./knowledge/categories/)：按漏洞类型整理的深度知识条目（15类 150+ 条目，含 AI Agent/MCP）。
+- [`knowledge/categories/`](./knowledge/categories/)：按漏洞类型整理的深度知识条目（16类 130+ 条目，另含 4 个框架漏洞库，含 AI Agent/MCP）。
 - [`techniques/`](./techniques/)：可复用技术卡（21类 38 张）。
-- [`cases/`](./cases/)：靶场、CTF 与授权实战案例（15 个）。
-- [`references/`](./references/)：深度专题文档（SQL注入/WebSocket/云元数据/SBOM供应链/DNS/TLS/OAuth/Passkey/请求走私/AI Agent，共 10 个专题、56 篇文档）。
+- [`cases/`](./cases/)：靶场、CTF 与授权实战案例（13 个）。
+- [`references/`](./references/)：深度专题文档（SQL注入/WebSocket/云元数据/SBOM供应链/DNS/TLS/OAuth/Passkey/请求走私/AI Agent，共 10 个专题、57 篇文档）。
 - [`mirrors/`](./mirrors/)：外部仓库镜像备份（codex-keysmith/claude-keysmith/zcode-keysmith）。
-- [`SKILL_INDEX.md`](./SKILL_INDEX.md)：骡子安全 Skill 索引（47 个 / 12 类）。
+- [`SKILL_INDEX.md`](./SKILL_INDEX.md)：骡子安全 Skill 索引（47 个历史快照 / 4 个当前活跃）。
 
 ## 快速导航
 
@@ -37,6 +37,7 @@
 | 反序列化 | 2 | Java URLDNS、PHP POP链 |
 | API绕过 | 3 | AES-CBC绕过、汇率操纵、Ruoyi配置 |
 | 认证 | 2 | JS硬编码凭证、验证码绕过 |
+| 支付绕过 | 1 | dujiaoka 支付回调伪造 |
 | PWN | 1 | PHP off-by-one 堆溢出 |
 | 侦察 | 1 | JS控制器枚举 |
 | WAF绕过 | 1 | 内联注释 |

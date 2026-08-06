@@ -1,10 +1,23 @@
 # 骡子 · 安全 Skill 索引
 
-> 自动生成于 2026-07-23 | 总计 **47** 个 Skill | 12 个分类
+> 自动生成于 2026-07-23（历史快照） | 总计 **47** 个 Skill | 13 个分类
 >
-> 真源：Hermes 安全 Skill 目录
+> ⚠️ 快照中的 skill 多数已不在当前环境；**当前实际加载 4 个**，见下方「当前活跃 Skill」。
 >
 > 📊 **完整能力索引** → [CAPABILITY.md](./CAPABILITY.md)（含技术卡/工具/知识/案例/镜像全貌）
+
+## 当前活跃 Skill（2026-08-06 实况）
+
+真源 `/root/.hermes/skills/security/` 当前只包含以下 4 个：
+
+| Skill | 描述 | 标签 |
+| --- | --- | --- |
+| `authorized-web-pentest` | 授权 Web 渗透测试全流程：资产测绘→指纹→扫描→漏洞验证→报告。 | web, pentest, authorized, recon, reporting |
+| `web-app-pentest` | 授权 Web 应用渗透测试方法论。 | web, pentest, methodology |
+| `web-pentest` | 授权站点 Web 渗透：侦察/指纹/SPA/打码/越权/上传。 | web, pentest, recon, captcha, idor, upload |
+| `ruoyi-biz-pentest` | 若依(RuoYi)系定制业务站渗透：管理接口发现/越权读写/打码登录/多 vhost 入口轮换。 | ruoyi, business, idor, captcha, vhost |
+
+以下 47 个为 2026-07-23 归档快照，仅作方法论参考。
 
 ## 分类概览
 
@@ -140,4 +153,4 @@
 
 ---
 
-> **维护说明**：本索引由骡子每日 cron 自动同步，真源为 `/root/.hermes/skills/security/`。手动修改本文件将在下次同步时被覆盖。
+> **维护说明**：上方「当前活跃 Skill」与 `/root/.hermes/skills/security/` 同步；47 个历史快照为 2026-07-23 归档，保留作方法论参考，不再随 cron 同步覆盖。

@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-08-06 — 六合彩站 复测与会话劫持利用链
+
+### Added
+- `cases/authorized/20260803-case-ruoyi-gambling-admin-api.yaml`：追加 六合彩站 复测结果——首轮管理接口越权已修复；新增 getInfo 密码哈希泄露（评级修正为低危设计缺陷，独立利用价值低）与上传 HTML 同源托管发现。
+- 会话劫持利用链全链实证：上传 HTML 同源 → 窃取 token → 外传 → 接口验证（已追加至上述案例文件）。
+
+### Fixed
+- getInfo 密码哈希泄露评级：高危 → 低危设计缺陷（独立利用价值低）。
+
+### Changed
+- `README.md` / `MASTER_INDEX.md` / `CAPABILITY.md` / `SKILL_INDEX.md`：数字与实际内容对齐（案例 11→13、专题 56→57 篇、知识条目 150+→130+、Skill 索引标注 47 历史快照 + 4 当前活跃）；MASTER_INDEX 技术卡表补 payment-bypass 类。
+
+## 2026-08-04 — 预测平台系 同族迁移站 API 签名密钥恢复
+
+### Added
+- `cases/authorized/20260804-case-预测平台系-signature-reversal.yaml`：同族迁移站 API 签名密钥黑盒恢复案例（含修复后复测结论）。
+
+## 2026-08-03 — RuoYi 博彩站管理接口越权读写
+
+### Added
+- `cases/authorized/20260803-case-ruoyi-gambling-admin-api.yaml`：RuoYi 博彩站管理接口越权读写案例，含支付密钥泄露与 XSS 注入点。
+
 ## 2026-07-23 — OA/ERP 框架漏洞库
 
 ### Added

@@ -1,17 +1,17 @@
 # SecAtlas 能力索引
 
-> 最后更新: 2026-07-23 | 单一真源
+> 最后更新: 2026-08-06 | 单一真源
 
 ## 总览
 
 | 资产 | 数量 | 位置 |
 |------|------|------|
-| Hermes Skill | 47 | `/root/.hermes/skills/security/` |
+| Hermes Skill | 4 当前活跃（47 历史快照） | `/root/.hermes/skills/security/` |
 | 技术卡 (YAML) | 38 | `techniques/` — 21 个分类 |
 | 知识条目 (MD) | 16 | `knowledge/categories/` + `knowledge/frameworks/` |
 | 实战工具 | 11 | `tools/` — Python/Go/Shell |
-| 案例 | 11 | `cases/` — 授权/CTF/Lab/PWN |
-| 深度专题 | 56 篇 | `references/` — 10 个专题 |
+| 案例 | 13 | `cases/` — 授权/CTF/Lab/PWN |
+| 深度专题 | 57 篇 | `references/` — 10 个专题 |
 | 镜像备份 | 3 | `mirrors/` — keysmith 系列 |
 
 ---
@@ -137,7 +137,7 @@
 
 ### 云与容器 (3) | LLM与AI (3) | 取证 (3) | 威胁建模 (1) | 凭据与供应链 (2) | 移动安全 (1) | 工具与辅助 (5)
 
-完整 47 Skill 详情见 `knowledge/categories/` 及 `/root/.hermes/skills/security/`。
+完整 47 Skill（2026-07-23 历史快照）见 [`SKILL_INDEX.md`](./SKILL_INDEX.md)；当前环境实际加载 4 个安全 Skill：`authorized-web-pentest` / `ruoyi-biz-pentest` / `web-app-pentest` / `web-pentest`（`/root/.hermes/skills/security/`）。
 
 ---
 
@@ -156,9 +156,9 @@
 | OAuth/OIDC | `knowledge/categories/oauth.md` | 10 |
 | 请求走私 | `knowledge/categories/request-smuggling.md` | 10 |
 | ACL | `knowledge/categories/acl.md` | 5 |
-| IDOR | `knowledge/categories/idor.md` | 5 |
+| IDOR | `knowledge/categories/idor.md` | 3 |
 | PWN | `knowledge/categories/pwn.md` | 5 |
-| 综合技巧 | `knowledge/categories/misc.md` | 17 |
+| 综合技巧 | `knowledge/categories/misc.md` | 12 |
 | AI Agent/MCP | `knowledge/categories/agentic-ai.md` | 1 |
 | 工具清单 | `knowledge/categories/tool-checklist-9phase.md` | 9 阶段 |
 
