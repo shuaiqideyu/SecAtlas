@@ -7,7 +7,7 @@
 | 资产 | 数量 | 位置 |
 |------|------|------|
 | Hermes Skill | 4 当前活跃（47 历史快照） | `/root/.hermes/skills/security/` |
-| 技术卡 (YAML) | 43 | `techniques/` — 22 个分类 |
+| 技术卡 (YAML) | 45 | `techniques/` — 22 个分类 |
 | 知识条目 (MD) | 18 | `knowledge/categories/` + `knowledge/frameworks/` |
 | 实战工具 | 11 | `tools/` — Python/Go/Shell |
 | 案例 | 16 | `cases/` — 授权/CTF/Lab/PWN |

@@ -1,7 +1,7 @@
 # 区块链充值对账安全 (Blockchain Deposit Reconciliation)
 
 > 来源: TRC20/ERC20 标准、TronGrid API 文档、授权事故复盘
-> 条目数: 2 | 分类: 区块链 (Blockchain)
+> 条目数: 3 | 分类: 区块链 (Blockchain)
 
 ---
 
@@ -20,5 +20,13 @@
 - **绕过与变体**: 地址推导用 Keccak-256(pub[1:])[-20:]+Base58Check(0x41)，签名用 SHA256——混用会导致 SIGERROR（恢复出的签名者不是 owner）；`auto_activation` 可自动激活未激活地址；能量订单约 10 秒完成
 - **修复**: 无（链上正常机制）；对账侧需区分 transfer/approve（见 KB-BLK-01）
 - **参考**: TRON Developer Hub（triggersmartcontract / broadcasttransaction / gettransactionbyid）、TronGrid API
+
+### [KB-BLK-03] 链上测绘：approve 伪装充值目标平台反查
+- **信号**: 需要定位"支持 USDT 充值上分且对账不过滤事件类型"的平台；web 侧测绘（FOFA）命中率低
+- **原理**: approve 攻击痕迹永久留链：同一 owner 对同一 spender 多次 approve（正常 DeFi 授权仅一次）、只 approve 不转账、金额为整数充值档位（10/100/500/1000/5000/15000）。从 USDT 合约 Approval 事件流（TronGrid events API 分页）统计 (owner,spender) 频次即可反查候选地址
+- **最小PoC**: `GET /v1/contracts/{USDT}/events?event_name=Approval&limit=200` 翻页 → 统计组合频次≥2 → 对候选查 `transactions/trc20?only_to=true` 判别（Transfer≈0 + 档位金额 + 非合约）→ 交叉扩散同一批 owner 的 approve 集合 = 站群清单
+- **绕过与变体**: 反例排除——交易所/跨链桥（海量 owner 各 1 次、大额流水）、OTC 钱包（approve 伴随大量 Transfer）；drainer 钓鱼站（approve 含 max uint256 无限授权）；日期金额（20260805）标记自动化测试批次
+- **修复**: 无（公开链上数据）；研究用途仅被动读取；平台侧防御见 KB-BLK-01
+- **参考**: TronGrid events API、实战测绘 2026-08-06（3 个高置信地址）
 
 ---

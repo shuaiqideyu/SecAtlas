@@ -6,7 +6,7 @@
 ## 内容入口
 
 - [`knowledge/categories/`](./knowledge/categories/)：按漏洞类型整理的深度知识条目（18类 133 条目，另含 4 个框架漏洞库，含 AI Agent/MCP）。
-- [`techniques/`](./techniques/)：可复用技术卡（22类 43 张）。
+- [`techniques/`](./techniques/)：可复用技术卡（22类 45 张）。
 - [`cases/`](./cases/)：靶场、CTF 与授权实战案例（16 个）。
 - [`references/`](./references/)：深度专题文档（SQL注入/WebSocket/云元数据/SBOM供应链/DNS/TLS/OAuth/Passkey/请求走私/AI Agent，共 10 个专题、57 篇文档）。
 - [`mirrors/`](./mirrors/)：外部仓库镜像备份（codex-keysmith/claude-keysmith/zcode-keysmith）。
@@ -38,7 +38,7 @@
 | API绕过 | 3 | AES-CBC绕过、汇率操纵、Ruoyi配置 |
 | 认证 | 2 | JS硬编码凭证、验证码绕过 |
 | 支付绕过 | 1 | dujiaoka 支付回调伪造 |
-| 区块链 | 2 | approve伪装充值、充值平台测绘与对账判定 |
+| 区块链 | 3 | approve伪装充值、平台测绘对账判定、链上approve目标反查 |
 | PWN | 1 | PHP off-by-one 堆溢出 |
 | 侦察 | 1 | JS控制器枚举 |
 | WAF绕过 | 1 | 内联注释 |
