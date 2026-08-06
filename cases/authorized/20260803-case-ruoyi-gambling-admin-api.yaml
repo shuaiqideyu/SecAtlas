@@ -93,3 +93,19 @@ fingerprint_triggers:
 sources:
   - agent: "骡子"
     date: "2026-08-03"
+
+retest:
+  date: "2026-08-06"
+  summary: "首轮核心越权漏洞已修复（管理接口全部加权限），但发现 2 个新问题"
+  fixed:
+    - "GET/PUT /bet/system/setting/* 越权读写 → 返回『无权操作』（6 入口一致）"
+    - "管理接口 /system/user/list 等 → 403；RESTful IDOR /system/sysUserAccount/{userId} → 403"
+    - "meridian.example.com vhost 反代已修复（502 → 200）"
+  new_findings:
+    - technique: "getInfo 密码哈希泄露"
+      detail: "GET /prod-api/getInfo 响应 user 对象含 password 字段（bcrypt hash），框架标准实现不返回该字段；弱口令可离线爆破/撞库"
+    - technique: "上传任意 HTML 同源托管"
+      detail: "/common/upload 白名单含 html → /prod-api/profile/upload/xxx.html 全入口可访问（同源）；前端 token 存 localStorage['App-Token'] → 同源 HTML 可窃取；avatar 上传仅后缀过滤（GIF polyglot 可过）"
+  notes:
+    - "权限修复全面：getUserAccount 忽略 userId 参数、updatePwd 校验旧密码、submitFinanceInfo 有状态校验"
+    - "复测新检查点：getInfo 字段脱敏、上传目录 Content-Disposition、avatar 魔数校验"
