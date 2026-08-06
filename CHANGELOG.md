@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-06 — 旧版 master 分支回收 + 缺失知识补全（XXE/PWN 技术卡与 lab 案例入库）
+
+### Added
+- `techniques/xxe/basic-file-read.yaml`、`techniques/xxe/blind-oob.yaml`：XXE 技术卡 2 张（文件读取/盲 OOB 数据渗透），填补 main 无 XXE 类别空白。
+- `techniques/pwn/heap-offbyone-fundamentals.yaml`、`techniques/pwn/uaf-detection.yaml`：堆 off-by-one 检测方法论与 UAF/双释放 ASan 检测技术卡 2 张。
+- `knowledge/categories/xxe.md`：新知识分类「XXE」（KB-XXE-01/02，2 条）。
+- `cases/lab/20260722-ssti-flask-jinja2.yaml`、`cases/lab/20260723-xxe-flask-lxml.yaml`：本地靶场训练案例 2 份（SSTI 五关卡全通、XXE lxml 6.x 安全行为研究）。
+- 索引同步：技术卡 39→43、知识 17→18 类（131→133 条）、案例 14→16。
+
+### Changed
+- 删除远端 `master` 分支（旧版黑骡知识库，含未脱敏靶机 IP 与 41MB 技能索引缓存）。有价值内容（4 技术卡/2 案例/XXE 分类）已提取入库 main；本地保留 `master-backup-20260806` 分支与 `master-eol-20260806` tag 以备回退。远端现仅 `main` 单分支。
+
 ## 2026-08-06 — USDT Approval 假充值事故复盘入库（链上对账新攻击面）
 
 ### Added

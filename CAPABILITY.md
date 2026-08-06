@@ -7,10 +7,10 @@
 | 资产 | 数量 | 位置 |
 |------|------|------|
 | Hermes Skill | 4 当前活跃（47 历史快照） | `/root/.hermes/skills/security/` |
-| 技术卡 (YAML) | 39 | `techniques/` — 22 个分类 |
-| 知识条目 (MD) | 17 | `knowledge/categories/` + `knowledge/frameworks/` |
+| 技术卡 (YAML) | 43 | `techniques/` — 22 个分类 |
+| 知识条目 (MD) | 18 | `knowledge/categories/` + `knowledge/frameworks/` |
 | 实战工具 | 11 | `tools/` — Python/Go/Shell |
-| 案例 | 14 | `cases/` — 授权/CTF/Lab/PWN |
+| 案例 | 16 | `cases/` — 授权/CTF/Lab/PWN |
 | 深度专题 | 57 篇 | `references/` — 10 个专题 |
 | 镜像备份 | 3 | `mirrors/` — keysmith 系列 |
 
@@ -41,7 +41,8 @@
 | **framework** | 1 (RuoYi 40 CVE 全集) | — |
 | **recon** | 1 (JS控制器枚举) | `recon-entry-ops` |
 | **waf-bypass** | 1 (内联注释) | `chain-ops` |
-| **pwn** | 1 (PHP off-by-one) | `binary-exploitation` |
+| **pwn** | 3 (PHP off-by-one/堆off-by-one/UAF检测) | `binary-exploitation` |
+| **xxe** | 2 (文件读取/盲OOB) | `web-api-ops` |
 
 ---
 
@@ -160,6 +161,7 @@
 | PWN | `knowledge/categories/pwn.md` | 5 |
 | 综合技巧 | `knowledge/categories/misc.md` | 12 |
 | 区块链 | `knowledge/categories/blockchain.md` | 1 |
+| XXE | `knowledge/categories/xxe.md` | 2 |
 | AI Agent/MCP | `knowledge/categories/agentic-ai.md` | 1 |
 | 工具清单 | `knowledge/categories/tool-checklist-9phase.md` | 9 阶段 |
 
