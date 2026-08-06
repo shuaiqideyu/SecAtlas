@@ -29,7 +29,7 @@ attack_surface:
 techniques_tried:
   - technique: "直接复用同族 eclipse 旧签名密钥重算"
     result: "failed"
-    detail: "迁移后密钥更换，旧密钥 （64-hex 已打码） 对 预测平台系 样本全部 MISMATCH —— 别复用，重新黑盒找"
+    detail: "迁移后密钥更换，旧密钥（64-hex 已打码）对 预测平台系 样本全部 MISMATCH —— 别复用，重新黑盒找"
 
   - technique: "管理接口 /api/admin/* 越权"
     result: "failed"
@@ -62,7 +62,7 @@ techniques_tried:
 success_path:
   - step: 1
     action: "资产画像：DNS/whois/证书 + FOFA 历史端口核查"
-    finding: "Cloudflare 全代理（203.0.113.16），域名 2026-05-28 新注册（）——防封迁移特征；2086 历史端口实测不可达；与 eclipse.example.com 同代码同标题，同族确认"
+    finding: "Cloudflare 全代理（203.0.113.16），域名 2026-05-28 新注册——防封迁移特征；2086 历史端口实测不可达；与 eclipse.example.com 同代码同标题，同族确认"
 
   - step: 2
     action: "空 UA / 带浏览器 UA 对比探测"
@@ -71,7 +71,7 @@ success_path:
   - step: 3
     action: "黑盒恢复签名密钥：hook TextEncoder.encode 抓高频 64-hex 串"
     payload: "playwright: TextEncoder.prototype.encode = function(s){ ... 记录每次 encode 的输入输出 ... }"
-    finding: "拿到新密钥 （64-hex 已打码）；算法不变：HMAC-SHA256(KEY, 'METHOD\\npathname\\nts\\nnonce\\nbodyhash')，样本 4/4 MATCH —— 可离线构造任意签名请求"
+    finding: "拿到新密钥（64-hex 已打码）；算法不变：HMAC-SHA256(KEY, 'METHOD\\npathname\\nts\\nnonce\\nbodyhash')，样本 4/4 MATCH —— 可离线构造任意签名请求"
 
   - step: 4
     action: "SVG 验证码明文解算 + 注册/登录"

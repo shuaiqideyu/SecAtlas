@@ -51,7 +51,7 @@ techniques_tried:
 
 success_path:
   - step: 1
-    action: "FOFA 反查 (title=某 / cert=域名) 发现全站群域名与服务器，含支付回调专用子域"
+    action: "FOFA 反查 (title=<品牌已打码> / cert=域名) 发现全站群域名与服务器，含支付回调专用子域"
     finding: "域名族 10+ 个、双服务器、内网 IP 泄露（宝塔自签证书 SAN）"
 
   - step: 2

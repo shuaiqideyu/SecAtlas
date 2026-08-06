@@ -1,9 +1,9 @@
 # Changelog
 
-## 2026-08-06 — 六合彩站 复测与会话劫持利用链
+## 2026-08-06 — 六合彩站复测与会话劫持利用链
 
 ### Added
-- `cases/authorized/20260803-case-ruoyi-gambling-admin-api.yaml`：追加 六合彩站 复测结果——首轮管理接口越权已修复；新增 getInfo 密码哈希泄露（评级修正为低危设计缺陷，独立利用价值低）与上传 HTML 同源托管发现。
+- `cases/authorized/20260803-case-ruoyi-gambling-admin-api.yaml`：追加六合彩站复测结果——首轮管理接口越权已修复；新增 getInfo 密码哈希泄露（评级修正为低危设计缺陷，独立利用价值低）与上传 HTML 同源托管发现。
 - 会话劫持利用链全链实证：上传 HTML 同源 → 窃取 token → 外传 → 接口验证（已追加至上述案例文件）。
 
 ### Fixed
