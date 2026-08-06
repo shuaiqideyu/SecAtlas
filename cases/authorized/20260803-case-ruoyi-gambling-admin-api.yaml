@@ -109,3 +109,12 @@ retest:
   notes:
     - "权限修复全面：getUserAccount 忽略 userId 参数、updatePwd 校验旧密码、submitFinanceInfo 有状态校验"
     - "复测新检查点：getInfo 字段脱敏、上传目录 Content-Disposition、avatar 魔数校验"
+
+exploit_proven:
+  - chain: "上传HTML同源托管 -> 会话劫持"
+    date: "2026-08-06"
+    detail: "全链实证：上传窃取页 -> 真实浏览器访问 -> JS读取localStorage[App-Token] -> HTTPS外传攻击者服务器(收信日志 STEAL token len=210) -> 被窃token调getUserAccount返回200+用户数据。会话劫持成立"
+    evidence: "poc_full.js + steal_log.txt（本地证据）"
+  - chain: "getInfo哈希泄露 -> 离线破解"
+    date: "2026-08-06"
+    detail: "bcrypt.checkpw秒级命中弱口令（已打码）；撞库admin未中(密码不复用)"
