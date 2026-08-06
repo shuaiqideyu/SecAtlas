@@ -38,7 +38,7 @@
 | API绕过 | 3 | AES-CBC绕过、汇率操纵、Ruoyi配置 |
 | 认证 | 2 | JS硬编码凭证、验证码绕过 |
 | 支付绕过 | 1 | dujiaoka 支付回调伪造 |
-| 区块链 | 1 | USDT approve 伪装充值 |
+| 区块链 | 2 | approve伪装充值、充值平台测绘与对账判定 |
 | PWN | 1 | PHP off-by-one 堆溢出 |
 | 侦察 | 1 | JS控制器枚举 |
 | WAF绕过 | 1 | 内联注释 |
