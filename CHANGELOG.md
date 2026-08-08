@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-08-08 — Next.js + Fastify BFF 开放平台案例入库（nova 代号，站主授权自测）
+
+### Added
+- `cases/authorized/20260808-case-nextjs-fastify-bff-platform.yaml`：Next.js(turbopack)+Fastify BFF 开放平台完整渗透复盘——BFF 浏览器校验绕过（Sec-Fetch-Dest: empty）、2captcha TurnstileTaskProxyless 打码、密码注册绕开 TG 收码、页面专属 chunk diff 挖接口、REST 路径参数详情（/bff/mode/algorithms/:id）、权限模型九项验证全绿（私有 404/公式 isOwner 剥离/编辑越权 404/Key IDOR 404/字段注入 400）。发现 3 项低危（hall 匿名泄露 ownerId、bind/start 发码无可见限流、Umami 非私有埋点）。
+- 方法论已同步至 `web-pentest` skill `references/nextjs-fastify-bff-pentest.md`（与 Express+签名系并列的第二套打法）。
+- 索引同步：案例 16→17、技术卡 45→46、深度专题 10→11/57→62 篇、工具 11→18（含今日早前提交漂移修正）。
+
 ## 2026-08-08 — 净值平台发现方法论入库（实测验证：FOFA时间字段受限/crt.sh关键词失效/关联发散路径）
 
 ### Added

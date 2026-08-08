@@ -119,10 +119,10 @@ SecAtlas 是**首个面向多 AI Agent 协作**的结构化安全知识库。
 
 - **AI Agent 入口**：[`AGENTS.md`](./AGENTS.md) / [`CAPABILITY.md`](./CAPABILITY.md)
 - **AI Agent/MCP 专题**：[`references/agentic-ai/`](./references/agentic-ai/) — 工具供应链、权限、注入、循环控制、证据与复测
-- **实战技术卡**：[`techniques/`](./techniques/) — 45 张 YAML 技术卡，含触发信号/payload/判据
-- **深度专题**：[`references/`](./references/) — 10 个专题 57 篇文档
+- **实战技术卡**：[`techniques/`](./techniques/) — 46 张 YAML 技术卡，含触发信号/payload/判据
+- **深度专题**：[`references/`](./references/) — 11 个专题 62 篇文档
 - **知识蒸馏**：[`knowledge/`](./knowledge/) — 18 个分类 133 条目，另含 4 个框架漏洞库
-- **案例复盘**：[`cases/`](./cases/) — 16 个攻防案例（含 20260803 RuoYi 博彩、20260804 预测平台系、20260806 六合彩站复测、20260730 USDT 假充值）
+- **案例复盘**：[`cases/`](./cases/) — 17 个攻防案例（含 20260803 RuoYi 博彩、20260804 预测平台系、20260806 六合彩站复测、20260730 USDT 假充值、20260808 Next.js+Fastify BFF 开放平台）
 - **外部备份**：[`mirrors/`](./mirrors/) — codex/claude/zcode keysmith
 
 ## 工具集

@@ -1,0 +1,140 @@
+# 案例：nova.example.com — Next.js + Fastify BFF 开放平台渗透（站主授权自测，脱敏）
+
+target:
+  url: "https://nova.example.com"
+  type: "authorized"
+  name: "开放平台（加拿大28/PC28 开奖、走势、算法大厅、开放 API、云端飞投）"
+  tech_stack:
+    - "Next.js (App Router, turbopack) SSR 前端"
+    - "Fastify BFF（/bff/*，站内浏览器特征校验）"
+    - "开放 API（/api/*，X-Api-Key 鉴权，免费不限流，源站 IP 软限 120/分）"
+    - "Cloudflare CDN + Turnstile 人机验证（sitekey 0x4AAAA 前缀）"
+    - "Umami 埋点（/u/api/*）"
+    - "独立 Vite SPA 子应用（/bet/ 云端飞投控制台）"
+  ports: [443]
+  fingerprint:
+    framework: "与预测平台系同族业务（PC28），架构全新：无 HMAC 签名，X-Api-Key + BFF 模式"
+    api_prefix: "/bff（内部）+ /api（开放）"
+    auth_type: "JWT HS256 15min（cookie pc28_at）+ Turnstile"
+    captcha_type: "Cloudflare Turnstile（2captcha TurnstileTaskProxyless 可解）"
+    error_signature: "FST_ERR_CTP_* / Route GET:/xxx not found = Fastify"
+
+attack_surface:
+  - "BFF 站内浏览器校验（Sec-Fetch-* 头检测，403 仅限站内浏览器）"
+  - "开放 API Key 生命周期（/bff/openapi/keys 增删改查，明文一次展示）"
+  - "算法大厅/详情（/bff/mode/hall、/bff/mode/algorithms/:id REST 路径参数）"
+  - "算法创建/编辑（POST/PATCH /bff/mode/algorithms，steps 公式 token 数组）"
+  - "云端飞投 TG 账号绑定（/bff/bet/tg-accounts/*，bind/start|verify|2fa|qr）"
+  - "Umami 埋点（/u/api/send 匿名可注入）"
+
+techniques_tried:
+  - technique: "BFF 浏览器校验绕过（无特征头 → 403 仅限站内浏览器）"
+    result: "success"
+    detail: "关键头 Sec-Fetch-Dest: empty（+ same-origin/cors）；Referer/Origin 伪造无效。带全头后 403 变 401/404 正常语义；枚举 46 词全 403 是缺头误报"
+
+  - technique: "认证注册（无 TG 收码能力卡点）"
+    result: "success"
+    detail: "平台同时支持 Telegram OTP 与密码注册；密码注册 {mode:password, username, displayName, password, cfTurnstileToken} 无需 TG 收码；Turnstile 用 2captcha TurnstileTaskProxyless 打码（sitekey 从页面 chunk JS 提取）；假 token → TURNSTILE_FAILED 证实服务端真校验"
+
+  - technique: "API Key IDOR（跨账号 PATCH/DELETE key）"
+    result: "failed"
+    detail: "他人 key id 操作 → 404 'Key 不存在或已删除'，按归属过滤，防护有效"
+
+  - technique: "私有算法越权（他人读/编辑）"
+    result: "failed"
+    detail: "匿名/他人读私有算法 404；非 owner PATCH（改名）404；私有算法不进大厅（q 搜索无结果）"
+
+  - technique: "公式泄露（steps 字段）"
+    result: "failed"
+    detail: "三视角验证（匿名/他人/owner）：他人 steps:null，owner steps 完整 —— 服务端按 isOwner 剥离，防护有效"
+
+  - technique: "profile 字段注入提权"
+    result: "failed"
+    detail: "PATCH /bff/auth/profile 带 role:admin / memberTier:vip → 400 未知字段被拒（schema 白名单），displayName 正常生效"
+
+  - technique: "JWT 伪造"
+    result: "failed"
+    detail: "HS256 15min 短期 token，iss/aud 校验；无弱密钥穷举（非重点）"
+
+  - technique: "飞投 TG 账号越权"
+    result: "failed"
+    detail: "tg-accounts 匿名 401；随机 id → 404 '账号不存在或不属于你'（归属校验）；完整绑定需真实 TG 账号扫码/收码，未测"
+
+  - technique: "匿名资源枚举（大厅列表）"
+    result: "success"
+    detail: "/bff/mode/hall 匿名全量 7955 算法，泄露 ownerId(UUID)/ownerDisplayName/createdAt/nextPredictLabel（下期预测）——低危信息面；预测公开属产品设计（开放 API 本就公开预测），非订阅绕过"
+
+  - technique: "验证码发送接口滥用探测"
+    result: "partial"
+    detail: "/bff/bet/tg-accounts/bind/start 任意格式正确手机号 → 200 needs_code 触发发码，未见限流（格式校验先于限流）；骚扰向量，低-中危，仅验证 1 次未继续打"
+
+  - technique: "敏感文件/管理面"
+    result: "failed"
+    detail: ".env/.git/swagger/actuator 全假 200 或 404；admin 路由仅前端守卫（降级用户中心页），无后端 admin API 暴露"
+
+success_path:
+  - step: 1
+    action: "资产画像 + 架构识别"
+    finding: "Next.js turbopack 特征 + FST_ERR_CTP 错误码 = Fastify BFF；sitemap.xml / llms.txt / developers/open-api.llms.md 直接给出全站路由与 API 契约（Key 形态/限速/错误码/白名单路径）——读文档优先于黑盒猜"
+
+  - step: 2
+    action: "BFF 接口枚举（带全浏览器头 + 登录 cookie）"
+    finding: "Fastify 'Route GET:/xxx not found' 404 特征区分真路由；/bff/ 面 = auth/* + market/* + mode/{hall,mine,favorites,algorithms/:id} + openapi/keys + bet/tg-accounts/*"
+
+  - step: 3
+    action: "Turnstile 打码 + 密码注册拿账号"
+    payload: "2captcha TurnstileTaskProxyless → token；POST /bff/auth/register {mode:password, username, displayName, password, cfTurnstileToken}"
+    finding: "注册即发 pc28_at JWT cookie（15min）；登录后 /bff/openapi/keys 创建个人 Key（'前缀_'+16hex，明文只返回一次）；注册第二个账号用于交叉越权测试"
+
+  - step: 4
+    action: "开放 API 全量测试（带 Key）"
+    finding: "12 个数据接口全通；pageSize 截断 50；sf 算法详情 predict/records 全公开（产品设计）；无公式字段；sort/参数无注入迹象"
+
+  - step: 5
+    action: "权限模型九项验证（两账号交叉 + 匿名）"
+    finding: "IDOR/越权/字段注入/私有隔离全部拦截，权限模型完整（详见 techniques_tried 逐项）"
+
+  - step: 6
+    action: "飞投子应用（/bet/ Vite SPA）接口发现"
+    finding: "页面加载抓 /bff/bet/tg-accounts（quota 3）+ 懒加载 chunk 挖出绑定流程接口族（bind/start|verify|2fa|qr|cancel|release-and-finalize、bet-targets CRUD、strategies/*）；归属校验有效，完整绑定需真实 TG 账号未测"
+
+findings:
+  - severity: "low"
+    title: "算法大厅/详情匿名可读泄露用户画像"
+    detail: "/bff/mode/hall + /bff/mode/algorithms/:id 匿名返回 ownerId(UUID)/ownerDisplayName/createdAt/下期预测/统计；7955 算法可全量枚举"
+    fix: "匿名响应剥离 ownerId；ownerDisplayName 按产品需求保留"
+
+  - severity: "low-medium"
+    title: "TG 账号绑定发码接口无可见限流"
+    detail: "/bff/bet/tg-accounts/bind/start 任意格式正确手机号返回 needs_code 触发发码；格式校验先于限流，未实测出 429"
+    fix: "按 IP/账号/手机号加频率限制 + 发送确认"
+
+  - severity: "low"
+    title: "Umami 非私有模式匿名埋点"
+    detail: "/u/api/send 匿名可注入事件污染统计"
+    fix: "开启 Umami privateMode"
+
+  - severity: "info"
+    title: "测试痕迹（站主自测，供清理）"
+    detail: "两个测试账号 + 一个 API Key + 一个私有测试算法（密码/Key 已打码，见内部映射）"
+    fix: "验收后吊销测试 Key、删除测试账号"
+
+techniques_learned:
+  - "Next.js + Fastify BFF 架构渗透完整流程：识别（turbopack + FST_ERR）→ BFF 枚举（Sec-Fetch-Dest 头）→ 密码注册绕 TG 收码 + Turnstile 打码 → 页面专属 chunk diff 挖接口 → REST 路径参数详情 → 权限模型九项验证"
+  - "Sec-Fetch-Dest: empty 是 BFF 浏览器校验绕过关键头（Referer/Origin 无效）；枚举前必须带全头否则全 403 误报"
+  - "2captcha TurnstileTaskProxyless 解 Cloudflare Turnstile（sitekey 0x4AAAA 前缀从 JS 提取）"
+  - "平台有密码注册模式时优先走它，绕开 TG 验证码收码卡点"
+  - "详情接口 REST 路径参数（/bff/mode/algorithms/:id），?id= 全枚举 404"
+  - "SSR 直出 vs 客户端懒加载：RSC payload（self.__next_f.push）提取 vs headless 抓包区分"
+  - "权限模型验证模板：私有 404 / 公式 isOwner 剥离 / 编辑 404 / Key IDOR 404 / 字段注入 400 —— 全绿才下'防护完整'结论"
+
+fingerprint_triggers:
+  - "_next/static/chunks + turbopack-*.js + FST_ERR_CTP_* 错误码 → Next.js + Fastify BFF 架构"
+  - "403 {'code':'FORBIDDEN','message':'仅限站内浏览器'} → BFF 浏览器特征校验，补 Sec-Fetch-Dest: empty"
+  - "Cloudflare Turnstile（0x4AAAA 前缀 sitekey）→ 2captcha TurnstileTaskProxyless 打码"
+  - "/u/api/send + /u/api/config（privateMode 字段）→ Umami 埋点，非私有模式可匿名注入"
+  - "llms.txt / developers/open-api.llms.md / docs 页 → 平台主动提供 AI 契约文档，API 面全公开，先读文档"
+
+sources:
+  - agent: "骡子"
+    date: "2026-08-08"

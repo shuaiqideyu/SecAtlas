@@ -7,11 +7,11 @@
 | 资产 | 数量 | 位置 |
 |------|------|------|
 | Hermes Skill | 4 当前活跃（47 历史快照） | `/root/.hermes/skills/security/` |
-| 技术卡 (YAML) | 45 | `techniques/` — 22 个分类 |
+| 技术卡 (YAML) | 46 | `techniques/` — 22 个分类 |
 | 知识条目 (MD) | 18 | `knowledge/categories/` + `knowledge/frameworks/` |
-| 实战工具 | 11 | `tools/` — Python/Go/Shell |
-| 案例 | 16 | `cases/` — 授权/CTF/Lab/PWN |
-| 深度专题 | 57 篇 | `references/` — 10 个专题 |
+| 实战工具 | 18 | `tools/` — Python/Go/Shell |
+| 案例 | 17 | `cases/` — 授权/CTF/Lab/PWN |
+| 深度专题 | 62 篇 | `references/` — 11 个专题 |
 | 镜像备份 | 3 | `mirrors/` — keysmith 系列 |
 
 ---
