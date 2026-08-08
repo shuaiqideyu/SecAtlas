@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-08-08 — iOS 水坑平台 Client 端对抗分析专题入库（WHP 代号）
+
+### Added
+- `references/ios-waterhole-platform/whp-docs/`：新深度专题 5 篇（TECH-2026-9702 / SRC-2026-9702）——移动水坑平台 client 端架构（SDK 路由/双链保底/8 秒收割目标）、C2 协议契约（端点/认证/26 命令全集/轮询时序）、内核桥接五级降级链（callSymbol→obChTK→fcall→XHR shell）、收割路径（钱包/通讯/浏览器/媒体，bundle id 已泛化）、蓝队检测 IoC（URL/JS 全局对象/行为特征/规则示例）。
+- 来源：授权分析的私有样本（17 个 client 端 JS 文件，不含内核链本体）；真实标识映射存仓库外 mapping 文件，链名等原始 IoC 仅保留于检测卡。
+- 索引同步：深度专题 10→11 个、57→62 篇。
+
 ## 2026-08-06 — 旧版 master 分支回收 + 缺失知识补全（XXE/PWN 技术卡与 lab 案例入库）
 
 ### Added
