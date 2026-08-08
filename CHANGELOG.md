@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-08 — 净值平台发现方法论入库（实测验证：FOFA时间字段受限/crt.sh关键词失效/关联发散路径）
+
+### Added
+- `techniques/recon/platform-discovery.yaml`：净值资金平台发现技术卡（TECH 平铺格式）——实测证明关键词搜索对净值平台无效（FOFA 268万资产全是老下载站矩阵、crt.sh 12关键词近60天零真实平台），沉淀 5 条有效路径（运营者关联发散/链上资金反查/诈骗黑名单情报流/FOFA业务指纹代理时间/净度验证）与 FOFA 免费账号字段坑位。
+- `tools/fofa_search.py`：FOFA API 查询工具（注意 error:false 成功响应判断、免费账号字段权限）。
+- `tools/crt_find_new.py`：CT 日志新证书域名筛选（多关键词/时间窗/托管域排除）。
+- `tools/whois_new.py`：批量 whois 注册时间筛选（并发，筛近 N 天新注册域名）。
+- 索引同步：技术卡 45→46、工具 15→18。
+
 ## 2026-08-08 — iOS 水坑平台 Client 端对抗分析专题入库（WHP 代号）
 
 ### Added
