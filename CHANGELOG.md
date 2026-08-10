@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-11 — nova 案例三轮复测/深挖更新入库（站主授权自测，08-10 第三~六轮）
+
+### Updated
+- `cases/authorized/20260808-case-nextjs-fastify-bff-platform.yaml`：追加 08-10 第三~六轮（黑盒审计/深入审计/复测/高危深挖）内容——新发现：**登录限速被 X-Forwarded-For 完全绕过（medium，本轮最高价值，限速信任可伪造头）**、ops 管理面公网暴露 9 端点（复测已下线✅）、导出 limit 无后端上限（公开数据定级修正为低危观察项，不标 DoS）、API Key maxActive 竞态绕过、飞投排行榜 TG 昵称+base64 头像隐私泄露（复测未修⚠️）、redeem 无限速、bind 发码号码维度换号绕过（已加固部分✅）；高危面实测排除：JWT 强密钥/alg-none、TG initData HMAC、刷榜注入（stats 服务端重算）、表达式引擎注入（白名单+256 步上限）、存储 XSS、中间件绕过头、SQLi。
+- 方法论经验同步：限速信任 XFF 的绕过测试法（429 基线对照 + 头逐个伪造）、限速维度判定（号码 vs IP 对照实验）、修复验证三态闭环（已修复/部分/未修复）。
+
 ## 2026-08-08 — Next.js + Fastify BFF 开放平台案例入库（nova 代号，站主授权自测）
 
 ### Added
