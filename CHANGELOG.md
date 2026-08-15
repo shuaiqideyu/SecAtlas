@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-16 — 索引校准：技术卡/知识条目/专题/工具/Skill 数字对齐 validate 实况
+
+### Changed
+- README 统计表：技术卡 45→46、知识条目 18→136、案例 16→17、专题 57篇/10专题→62篇/11专题、工具 10→18、Skill 4→126。
+- MASTER_INDEX：最后更新 2026-08-16；知识条目 133→136；技术卡 22类→23类；技术卡目录表补 XXE 行、PWN 1→3（堆 off-by-one/UAF 检测）、侦察 1→2（平台发现方法论）。
+- CAPABILITY：总览表技术卡分类 22→23、知识条目 18→18类136条、Skill 4→126；技术卡×Skill 对照表重排（去 agentic-ai/framework 残留行，补 blockchain/payment-bypass，XXE 移正位）；知识索引表 blockchain 1→3；深度专题表补 AI Agent/MCP（4）与 iOS水坑平台（5）、DNS 14→17。
+- SKILL_INDEX：当前活跃 4→126（思念派大星全能包导入 + 既有 4 主 Skill）。
+
 ## 2026-08-11 — nova 案例三轮复测/深挖更新入库（站主授权自测，08-10 第三~六轮）
 
 ### Updated

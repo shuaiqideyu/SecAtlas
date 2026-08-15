@@ -11,8 +11,9 @@ def fofa_search(query, size=10, fields='host,title,port,protocol,lastupdatetime,
     q = base64.b64encode(query.encode()).decode()
     url = (f'https://fofa.info/api/v1/search/all?email={urllib.parse.quote(EMAIL)}'
            f'&key={urllib.parse.quote(KEY)}&qbase64={q}&size={size}&fields={fields}')
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
     try:
-        with urllib.request.urlopen(url, timeout=30) as r:
+        with urllib.request.urlopen(req, timeout=30) as r:
             return json.loads(r.read().decode())
     except Exception as e:
         return {'error': str(e)}

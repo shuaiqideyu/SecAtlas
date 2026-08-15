@@ -1,14 +1,14 @@
 # SecAtlas 能力索引
 
-> 最后更新: 2026-08-06 | 单一真源
+> 最后更新: 2026-08-16 | 单一真源
 
 ## 总览
 
 | 资产 | 数量 | 位置 |
 |------|------|------|
-| Hermes Skill | 4 当前活跃（47 历史快照） | `/root/.hermes/skills/security/` |
-| 技术卡 (YAML) | 46 | `techniques/` — 22 个分类 |
-| 知识条目 (MD) | 18 | `knowledge/categories/` + `knowledge/frameworks/` |
+| Hermes Skill | 126 个（安全分类；含历史归档） | `/root/.hermes/skills/security/` |
+| 技术卡 (YAML) | 46 | `techniques/` — 23 个分类 |
+| 知识条目 (MD) | 18 类 136 条 | `knowledge/categories/` + `knowledge/frameworks/` |
 | 实战工具 | 18 | `tools/` — Python/Go/Shell |
 | 案例 | 17 | `cases/` — 授权/CTF/Lab/PWN |
 | 深度专题 | 62 篇 | `references/` — 11 个专题 |
@@ -29,20 +29,20 @@
 | **idor** | 3 (RESTful枚举/API越权/批量探测) | `web-api-ops` |
 | **request-smuggling** | 2 (CL.TE/H2降级) | `web-api-ops` |
 | **deserialization** | 2 (Java URLDNS/PHP POP) | `binary-exploitation` |
+| **xxe** | 2 (文件读取/盲OOB) | `web-api-ops` |
 | **cache-poisoning** | 1 (Unkeyed Header) | `poison-ops` P1 |
 | **log-poisoning** | 1 (LFI→RCE) | `poison-ops` P2 |
 | **network-poisoning** | 1 (ARP欺骗) | `poison-ops` P3 |
 | **cicd-poisoning** | 1 (依赖混淆) | `poison-ops` P4 |
 | **data-poisoning** | 1 (Redis SSH Key) | `poison-ops` P6 |
 | **code-audit** | 1 (Agent驱动CVE) | `pentest-orchestrator` |
-| **agentic-ai** | 1 (Agent/MCP 控制闭环) | `ai-agent-security-assessment` / `agent-self-check` |
 | **api-bypass** | 3 (AES绕过/汇率操纵/Ruoyi配置) | `chain-ops` |
 | **auth** | 2 (JS凭证/验证码绕过) | `cred-hunt` |
-| **framework** | 1 (RuoYi 40 CVE 全集) | — |
-| **recon** | 1 (JS控制器枚举) | `recon-entry-ops` |
+| **payment-bypass** | 1 (dujiaoka 回调伪造) | `chain-ops` |
+| **blockchain** | 3 (approve伪装充值/平台测绘对账/链上反查) | `chain-ops` |
+| **recon** | 2 (JS控制器枚举/平台发现) | `recon-entry-ops` |
 | **waf-bypass** | 1 (内联注释) | `chain-ops` |
 | **pwn** | 3 (PHP off-by-one/堆off-by-one/UAF检测) | `binary-exploitation` |
-| **xxe** | 2 (文件读取/盲OOB) | `web-api-ops` |
 
 ---
 
@@ -138,7 +138,7 @@
 
 ### 云与容器 (3) | LLM与AI (3) | 取证 (3) | 威胁建模 (1) | 凭据与供应链 (2) | 移动安全 (1) | 工具与辅助 (5)
 
-完整 47 Skill（2026-07-23 历史快照）见 [`SKILL_INDEX.md`](./SKILL_INDEX.md)；当前环境实际加载 4 个安全 Skill：`authorized-web-pentest` / `ruoyi-biz-pentest` / `web-app-pentest` / `web-pentest`（`/root/.hermes/skills/security/`）。
+完整 47 Skill（2026-07-23 历史快照）见 [`SKILL_INDEX.md`](./SKILL_INDEX.md)；当前环境实际加载 126 个安全 Skill（`/root/.hermes/skills/security/`），含思念派大星全能技能包与既有 4 个授权渗透 Skill：`authorized-web-pentest` / `ruoyi-biz-pentest` / `web-app-pentest` / `web-pentest`。
 
 ---
 
@@ -160,7 +160,7 @@
 | IDOR | `knowledge/categories/idor.md` | 3 |
 | PWN | `knowledge/categories/pwn.md` | 5 |
 | 综合技巧 | `knowledge/categories/misc.md` | 12 |
-| 区块链 | `knowledge/categories/blockchain.md` | 1 |
+| 区块链 | `knowledge/categories/blockchain.md` | 3 |
 | XXE | `knowledge/categories/xxe.md` | 2 |
 | AI Agent/MCP | `knowledge/categories/agentic-ai.md` | 1 |
 | 工具清单 | `knowledge/categories/tool-checklist-9phase.md` | 9 阶段 |
@@ -173,13 +173,15 @@
 |------|--------|------|
 | SQL注入 | 9 | 原理/形态/检测/审计/修复/盲注/来源 |
 | SBOM供应链 | 7 | SBOM边界/组件身份/签名/SLSA/VEX |
-| DNS与DNSSEC | 14 | 技术卡/Runbooks/攻击矩阵/防守核查 |
+| DNS与DNSSEC | 17 | 技术卡/Runbooks/攻击矩阵/防守核查 |
 | WebSocket-SSE | 4 | 攻击面/测试思路/授权验证 |
 | 云元数据 | 4 | 攻击面/低影响验证/证据 |
 | OAuth/OIDC | 1 | RFC 9700 授权码流安全 |
 | Passkey/WebAuthn | 4 | 依赖方安全基线/审计清单 |
 | TLS/0-RTT | 3 | TLS1.3 0RTT 重放防护 |
 | 请求走私 | 2 | H2/Desync |
+| AI Agent/MCP | 4 | 攻击面与控制对/来源取舍/证据复测清单 |
+| iOS水坑平台 | 5 | 架构/C2契约/桥接降级链/收割路径/检测IoC |
 
 ---
 
