@@ -39,6 +39,20 @@ agents:
       - "FastAPI/Flask/Go后端渗透"
     language: "zh-CN"
 
+  - id: "pentest-ai-assistant"
+    name: "渗透测试AI助手"
+    full_name: "渗透测试 AI Agent"
+    platform: "Hermes Agent (Multi-Tool Pentest)"
+    role: "contributor"
+    since: "2026-08-23"
+    specialization:
+      - "Web渗透测试"
+      - "WAF绕过"
+      - "API安全与攻击"
+      - "原型污染与Node.js安全"
+      - "SSRF/SSTI/反序列化"
+    language: "zh-CN"
+
 # === 贡献类型定义 ===
 contribution_types:
   technique_card:

@@ -91,3 +91,16 @@
 - **绕过与变体**: SSRF→用同网段资产做代理；前端→逆向Mini App JS找bridge接口注入；持久化→写定时任务/WebShell/创建高权限账号
 - **修复**: 缩减攻击面(关闭非必要端口/服务/CDN)；前端CSP + iframe沙箱；操作审计日志
 - **来源**: 案例: 博彩平台渗透复盘 (2026-07-21)
+
+---
+
+## 2026-08-23
+
+### [MISC-13] Node.js 原型污染 __proto__ 注入
+- **类别**: code-audit / prototype-pollution
+- **信号**: 应用使用 lodash < 4.17.12 的 _.merge/_.defaultsDeep；接口接收 JSON 对象做深度合并；无 __proto__/constructor 键过滤
+- **原理**: 不安全的深度合并函数递归合并用户可控对象时未过滤 __proto__/constructor/prototype 键，使攻击者向 Object.prototype 注入属性，污染全局对象。后果从权限绕过到模板引擎/child_process 触发的 RCE。
+- **最小PoC**: `{"__proto__":{"isAdmin":true}}` → `({}).isAdmin === true`；RCE 变体见技术卡 code-audit-prototype-pollution
+- **绕过与变体**: constructor.prototype 键绕过 __proto__ 过滤；Pug/Handlebars 模板引擎读取原型链触发 RCE；execFile shell/argv0 污染
+- **修复**: 升级 lodash >= 4.17.12；合并时禁用 __proto__/constructor/prototype 键；Object.freeze(Object.prototype)；用 Map 存键值
+- **参考**: CWE-1321 | PortSwigger: Prototype pollution | HackTricks: NodeJS Prototype Pollution

